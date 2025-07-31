@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 4: Building Blueprints with Object-Oriented Programming - Anup's Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+    />
+    <style>
+      details {
+        border: 1px solid #333;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        padding: 0.5rem 1rem;
+      }
+      summary {
+        cursor: pointer;
+        font-weight: bold;
+        outline: none;
+      }
+      summary h4 {
+        display: inline-block;
+        margin: 0;
+      }
+      .quote-box {
+        background-color: #2d2d2d;
+        border-left: 4px solid #7a7cff;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        border-radius: 4px;
+      }
+      .quote-box p {
+        margin: 0;
+        font-style: italic;
+        color: #cccccc;
+        line-height: 1.6;
+      }
+      .explanation {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        color: #000;
+        font-size: 0.95rem;
+        border-left: 2px solid #555;
+        padding-left: 1rem;
+      }
+      .explanation strong {
+        color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="paper"></div>
+
+    <main class="container">
+      <header class="header">
+        <a href="../index.html" class="back-link">← Back to Portfolio</a>
+        <h1>Day 4: Building Blueprints with Object-Oriented Programming</h1>
+        <p class="blog-meta">August 3, 2025</p>
+      </header>
+
+      <article class="blog-content">
+        <p class="blog-intro">
+          If functions are tools,<br />
+          then objects are the complex machines you build with them.
+        </p>
+
+        <p>
+          Welcome to Day 4. So far, we've worked with data (variables, lists) and actions (functions). But the real world isn't so neatly separated. A 'user' isn't just a name; it's a name, an email, a login status, and the ability to log in or log out. **Object-Oriented Programming (OOP)** is a paradigm that lets us model this reality. It's about creating 'objects' that bundle together data (attributes) and behavior (methods) into a single, logical unit.
+        </p>
+        <p>
+          This is the leap from being a scriptwriter to an architect. Mastering OOP allows you to build complex, scalable, and maintainable applications. Today, we'll explore the four pillars of OOP that make this possible.
+        </p>
+
+        <h2 data-aos="fade-up">
+          The Four Pillars of OOP
+        </h2>
+        <p data-aos="fade-up" data-aos-delay="100">
+          OOP is built on four core principles. Understand these, and you'll understand the "why" behind most modern software architecture.
+        </p>
+
+        <h3 data-aos="slide-right">
+          1. Encapsulation: The Protective Bubble
+        </h3>
+        <p>
+          <strong>Encapsulation</strong> is the practice of bundling data (attributes) and the methods that operate on that data within a single unit, or 'class'. It's like a capsule: the medicine (data) is protected inside, and you can only interact with it through a defined interface (methods). This prevents accidental modification of the data and hides complexity.
+        </p>
+        <pre><code class="language-python"># Python Example: A simple Car class
+class Car:
+    def __init__(self, make, model):
+        self.make = make  # attribute
+        self.model = model # attribute
+        self._speed = 0   # private attribute convention
+
+    def accelerate(self, amount): # method
+        self._speed += amount
+
+    def get_speed(self): # method to access private data
+        return self._speed
+</code></pre>
+
+        <h3 data-aos="slide-right">
+          2. Inheritance: The Family Tree
+        </h3>
+        <p>
+          <strong>Inheritance</strong> allows a new class (the 'child' or 'subclass') to inherit attributes and methods from an existing class (the 'parent' or 'superclass'). This promotes code reuse. An `ElectricCar` is a type of `Car`, so it should inherit all the properties of a `Car` and add its own, like a `battery_level`.
+        </p>
+        <pre><code class="language-java">// Java Example: Inheritance
+class Animal { // Parent class
+    void eat() {
+        System.out.println("This animal eats food.");
+    }
+}
+
+class Dog extends Animal { // Child class inherits from Animal
+    void bark() {
+        System.out.println("The dog barks.");
+    }
+}
+</code></pre>
+
+        <h3 data-aos="slide-right">
+          3. Polymorphism: The Shape-Shifter
+        </h3>
+        <p>
+          <strong>Polymorphism</strong> (from Greek, "many forms") is the ability of an object to take on many forms. In practice, it means you can have a parent class reference point to a child class object. More importantly, it allows different child classes to implement the same method in different ways (method overriding). You can tell a `Dog` to `makeSound()` and it will bark; tell a `Cat` to `makeSound()` and it will meow.
+        </p>
+        <pre><code class="language-python"># Python Example: Polymorphism
+class Cat(Animal): # Assuming Animal class exists
+    def speak(self):
+        return "Meow"
+
+class Dog(Animal):
+    def speak(self):
+        return "Woof"
+
+def make_animal_speak(animal):
+    print(animal.speak())
+
+make_animal_speak(Cat()) # Output: Meow
+make_animal_speak(Dog()) # Output: Woof
+</code></pre>
+
+        <h3 data-aos="slide-right">
+          4. Abstraction: The Simple Interface
+        </h3>
+        <p>
+          <strong>Abstraction</strong> means hiding the complex implementation details and showing only the essential features of the object. When you drive a car, you use the steering wheel and pedals. You don't need to know how the engine, transmission, and electronics work underneath. In OOP, we use abstract classes and interfaces to define a "contract" of what a class can do, without specifying how it does it.
+        </p>
+
+        <div class="quote-box">
+          <p>
+            <strong>Interview Trade Secret:</strong> Be ready to explain the difference between an **Abstract Class** and an **Interface**.
+            - An **Interface** is a pure contract: it only contains method signatures (and constants), no implementation. A class `implements` an interface, and can implement many.
+            - An **Abstract Class** is a mix: it can have both abstract methods (no implementation) and concrete methods (with implementation). A class `extends` an abstract class, and can only extend one.
+            Use an interface when you want to define a capability (e.g., `Flyable`, `Serializable`). Use an abstract class when you want to provide a base implementation that subclasses can share and build upon (e.g., a base `Animal` class with a concrete `eat()` method).
+          </p>
+        </div>
+
+        <h2 data-aos="fade-up">Day 4 Problems: Modeling the World</h2>
+        <p data-aos="fade-up" data-aos-delay="100">
+            Time to apply these powerful concepts. These problems will challenge you to think in terms of objects, blueprints, and relationships.
+        </p>
+
+        <h3>10 Python Problems: Building with Classes</h3>
+        <details>
+            <summary><h4>1. Create a `Circle` class</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> This is a gentle introduction to creating a class with an initializer (`__init__`) and methods that perform calculations based on its attributes.<br/>
+                <strong>Principle:</strong> Encapsulation. The `radius` is stored within the object, and the `area` and `circumference` methods operate on that internal data.
+            </p>
+            <pre><code class="language-python">import math
+
+class Circle:
+    def __init__(self, radius):
+        self.radius = radius
+
+    def area(self):
+        return math.pi * (self.radius ** 2)
+
+    def circumference(self):
+        return 2 * math.pi * self.radius
+
+c = Circle(5)
+print(c.area()) # Output: 78.53...
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>2. Create a `BankAccount` class</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> Models a real-world entity with state (`balance`) and actions (`deposit`, `withdraw`). It introduces the concept of data protection.<br/>
+                <strong>Principle:</strong> Encapsulation and State Management. The balance is made "private" (by convention with `_`). Methods provide a safe, controlled interface to modify this state, including checks to prevent overdrafts.
+            </p>
+            <pre><code class="language-python">class BankAccount:
+    def __init__(self, initial_balance=0):
+        self._balance = initial_balance
+
+    def deposit(self, amount):
+        if amount > 0:
+            self._balance += amount
+
+    def withdraw(self, amount):
+        if 0 < amount <= self._balance:
+            self._balance -= amount
+        else:
+            print("Insufficient funds or invalid amount.")
+
+    def get_balance(self):
+        return self._balance
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>3. Create `Vehicle`, `Car`, and `Motorcycle` classes</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> A classic inheritance problem. It demonstrates how to create a base class with common functionality and specialized subclasses.<br/>
+                <strong>Principle:</strong> Inheritance. `Car` and `Motorcycle` inherit the `__init__` and `display_info` methods from `Vehicle`, reducing code duplication. They also add their own specific attributes.
+            </p>
+            <pre><code class="language-python">class Vehicle:
+    def __init__(self, make, model, year):
+        self.make = make
+        self.model = model
+        self.year = year
+
+class Car(Vehicle):
+    def __init__(self, make, model, year, num_doors):
+        super().__init__(make, model, year)
+        self.num_doors = num_doors
+
+class Motorcycle(Vehicle):
+    def __init__(self, make, model, year, type_of_bike):
+        super().__init__(make, model, year)
+        self.type_of_bike = type_of_bike
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>4. Create a `Book` and `Library` class</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> This problem models a "has-a" relationship (Composition). A `Library` *has* a collection of `Book` objects.<br/>
+                <strong>Principle:</strong> Composition over Inheritance. The `Library` class contains a list of `Book` instances, demonstrating how objects can be composed of other objects.
+            </p>
+            <pre><code class="language-python">class Book:
+    def __init__(self, title, author):
+        self.title = title
+        self.author = author
+
+class Library:
+    def __init__(self):
+        self.books = []
+
+    def add_book(self, book):
+        self.books.append(book)
+
+    def find_book(self, title):
+        for book in self.books:
+            if book.title == title:
+                return book
+        return None
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>5. Implement a `Vector` class for 2D vectors</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> Introduces "dunder" (double underscore) methods like `__add__` and `__str__`. This allows you to use standard operators like `+` with your custom objects.<br/>
+                <strong>Principle:</strong> Operator Overloading. By implementing `__add__`, you define what the `+` operator means for your `Vector` objects, making the code intuitive. `__str__` provides a user-friendly string representation.
+            </p>
+            <pre><code class="language-python">class Vector:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def __add__(self, other):
+        return Vector(self.x + other.x, self.y + other.y)
+
+    def __str__(self):
+        return f"Vector({self.x}, {self.y})"
+
+v1 = Vector(2, 3)
+v2 = Vector(3, 4)
+v3 = v1 + v2
+print(v3) # Output: Vector(5, 7)
+</code></pre>
+        </details>
+
+        <h3>10 Java Problems: Building with Discipline</h3>
+        <details>
+            <summary><h4>1. Create a `Rectangle` class</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> Java's version of the `Circle` problem. It reinforces the structure of a Java class: private fields, a constructor to initialize them, and public methods to interact with them.<br/>
+                <strong>Principle:</strong> Strict Encapsulation. In Java, we explicitly declare fields as `private` to enforce that they cannot be accessed directly from outside the class. Access is granted only via public "getter" methods.
+            </p>
+            <pre><code class="language-java">public class Rectangle {
+    private double width;
+    private double height;
+
+    public Rectangle(double width, double height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    public double getArea() {
+        return this.width * this.height;
+    }
+
+    public double getPerimeter() {
+        return 2 * (this.width + this.height);
+    }
+}
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>2. Create a `Person` class</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> A simple but essential class that demonstrates the use of private fields and public "getter" and "setter" methods, a standard Java pattern.<br/>
+                <strong>Principle:</strong> JavaBeans Convention. The get/set method pattern is a fundamental convention in Java for accessing and modifying object properties.
+            </p>
+            <pre><code class="language-java">public class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>3. `Shape`, `Circle`, `Square` classes</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> A classic polymorphism problem in Java using an abstract base class. It forces the subclasses to provide their own implementation for calculating area.<br/>
+                <strong>Principle:</strong> Abstraction and Polymorphism. The `Shape` class is `abstract` because a generic "shape" doesn't have an area; it's a concept. It defines an abstract `getArea()` method, which acts as a contract, forcing any concrete subclass like `Circle` or `Square` to implement it.
+            </p>
+            <pre><code class="language-java">abstract class Shape {
+    public abstract double getArea(); // Abstract method
+}
+
+class Circle extends Shape {
+    private double radius;
+    // constructor...
+    @Override
+    public double getArea() {
+        return Math.PI * radius * radius;
+    }
+}
+
+class Square extends Shape {
+    private double side;
+    // constructor...
+    @Override
+    public double getArea() {
+        return side * side;
+    }
+}
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>4. `Author` and `Book` classes</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> The Java version of composition. It shows how one object can be an attribute of another, creating complex data structures.<br/>
+                <strong>Principle:</strong> Composition. The `Book` class *has an* `Author` object as one of its fields. This models real-world relationships more accurately than trying to make a `Book` inherit from an `Author`.
+            </p>
+            <pre><code class="language-java">public class Author {
+    private String name;
+    // constructor, getters...
+}
+
+public class Book {
+    private String title;
+    private Author author; // Composition
+    // constructor, getters...
+}
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>5. Implement an `enum` for `TrafficLight`</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> An `enum` is a special type of class in Java that limits a variable to a set of predefined constants. It's perfect for things like states, days of the week, or traffic lights.<br/>
+                <strong>Principle:</strong> Type Safety. Using an `enum` is much safer than using strings or integers because it prevents you from assigning an invalid value. The compiler enforces that a `TrafficLight` variable can only be `RED`, `YELLOW`, or `GREEN`.
+            </p>
+            <pre><code class="language-java">public enum TrafficLight {
+    RED("Stop"),
+    YELLOW("Wait"),
+    GREEN("Go");
+
+    private final String action;
+
+    TrafficLight(String action) {
+        this.action = action;
+    }
+
+    public String getAction() {
+        return this.action;
+    }
+}
+// Usage: TrafficLight currentLight = TrafficLight.RED;
+// System.out.println(currentLight.getAction()); // "Stop"
+</code></pre>
+        </details>
+
+        <p class="blog-conclusion">
+          You've just learned the blueprint for almost all modern software.<br />
+          OOP is more than a technique; it's a way of thinking. It allows you to manage complexity and build systems that are robust and easy to change.<br/>
+          Tomorrow, we'll learn what to do when things go wrong with error handling.
+        </p>
+      </article>
+    </main>
+
+    <!-- MathJax for beautiful math rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        }
+      };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="../script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/intersection-observer@0.12.0/intersection-observer.js"></script>
+    <script src="blog-script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 5: Real-World Resilience - Error Handling & File I/O - Anup's Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+    />
+    <style>
+      details {
+        border: 1px solid #333;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        padding: 0.5rem 1rem;
+      }
+      summary {
+        cursor: pointer;
+        font-weight: bold;
+        outline: none;
+      }
+      summary h4 {
+        display: inline-block;
+        margin: 0;
+      }
+      .quote-box {
+        background-color: #2d2d2d;
+        border-left: 4px solid #7a7cff;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        border-radius: 4px;
+      }
+      .quote-box p {
+        margin: 0;
+        font-style: italic;
+        color: #cccccc;
+        line-height: 1.6;
+      }
+      .explanation {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        color: #000;
+        font-size: 0.95rem;
+        border-left: 2px solid #555;
+        padding-left: 1rem;
+      }
+      .explanation strong {
+        color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="paper"></div>
+
+    <main class="container">
+      <header class="header">
+        <a href="../index.html" class="back-link">← Back to Portfolio</a>
+        <h1>Day 5: Real-World Resilience - Error Handling & File I/O</h1>
+        <p class="blog-meta">August 4, 2025</p>
+      </header>
+
+      <article class="blog-content">
+        <p class="blog-intro">
+          A program that only works on perfect data is a program that doesn't work.<br />
+          Today, we build programs that survive contact with reality.
+        </p>
+
+        <p>
+          So far, we've lived in a perfect world where users never enter text instead of numbers, files always exist, and network connections never drop. That world ends today. Welcome to Day 5, where we learn two of the most critical skills for writing professional, robust software: **Error Handling** and **File Input/Output (I/O)**.
+        </p>
+        <p>
+          Error handling is your program's immune system; it anticipates problems and deals with them gracefully instead of crashing. File I/O is your program's memory; it allows you to save data permanently and read it back later. Together, they form the backbone of any application that needs to be reliable and persistent.
+        </p>
+
+        <h2 data-aos="fade-up">
+          Part 1: Grace Under Pressure - Error Handling
+        </h2>
+        <p data-aos="fade-up" data-aos-delay="100">
+          An error, or **exception**, is an event that disrupts the normal flow of a program. If you don't handle it, your program crashes. Good error handling doesn't just prevent crashes; it provides a better user experience and makes your code easier to debug.
+        </p>
+
+        <h3 data-aos="slide-right">
+          Python: The `try...except` Block
+        </h3>
+        <p>
+          Python's approach is to "ask for forgiveness, not permission." You `try` to run a block of code. If an error occurs, the code in the `except` block is executed. The `finally` block runs no matter what, perfect for cleanup operations.
+        </p>
+        <pre><code class="language-python"># Python Error Handling
+try:
+    # Code that might raise an error
+    result = 10 / 0
+except ZeroDivisionError as e:
+    # Code to run if that specific error occurs
+    print(f"Error: Cannot divide by zero. Details: {e}")
+except Exception as e:
+    # A general catch-all for any other exceptions
+    print(f"An unexpected error occurred: {e}")
+finally:
+    # This code runs whether there was an error or not
+    print("Execution finished.")
+</code></pre>
+
+        <h3 data-aos="slide-right">
+          Java: The `try...catch` Block and Checked Exceptions
+        </h3>
+        <p>
+          Java is more proactive. It categorizes exceptions into **checked** and **unchecked**.
+          - **Unchecked exceptions** (like `NullPointerException`) are usually programming errors and don't need to be explicitly handled.
+          - **Checked exceptions** (like `IOException`) are problems a well-written application should anticipate and recover from. The Java compiler *forces* you to handle them with a `try...catch` block or declare that your method `throws` them.
+        </p>
+        <pre><code class="language-java">// Java Error Handling
+import java.io.FileReader;
+import java.io.FileNotFoundException;
+
+public class ErrorHandlingExample {
+    public static void main(String[] args) {
+        try {
+            // This is a checked exception, we MUST handle it.
+            FileReader reader = new FileReader("non_existent_file.txt");
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: The file was not found.");
+            e.printStackTrace(); // Prints the full error stack trace
+        } finally {
+            System.out.println("File reading attempt finished.");
+        }
+    }
+}
+</code></pre>
+        <div class="quote-box">
+          <p>
+            <strong>Interview Trade Secret:</strong> What's the difference between `Error` and `Exception` in Java?
+            - An **`Exception`** indicates a condition that a reasonable application might want to catch. These are recoverable (e.g., `FileNotFoundException`).
+            - An **`Error`** indicates a serious problem that a reasonable application should not try to catch. These are generally non-recoverable system-level issues (e.g., `OutOfMemoryError`, `StackOverflowError`).
+            Knowing this distinction shows a deep understanding of the Java Virtual Machine (JVM).
+          </p>
+        </div>
+
+        <h2 data-aos="fade-up">
+          Part 2: Making Data Last - File I/O
+        </h2>
+        <p data-aos="fade-up" data-aos-delay="100">
+          Variables and objects live in RAM; when your program ends, they vanish. To save data permanently, we need to write it to a **file**. File I/O is the process of reading from and writing to files on a disk.
+        </p>
+
+        <h3 data-aos="slide-right">
+          Python: Simple and Clean File Handling
+        </h3>
+        <p>
+          Python's `with open(...)` syntax is the preferred way to work with files. It's elegant and safe because it automatically handles closing the file for you, even if errors occur.
+        </p>
+        <pre><code class="language-python"># Writing to a file in Python
+lines_to_write = ["Hello, file!", "This is a new line."]
+with open("my_file.txt", "w") as f: # "w" for write mode
+    for line in lines_to_write:
+        f.write(line + "\n")
+
+# Reading from a file in Python
+with open("my_file.txt", "r") as f: # "r" for read mode
+    for line in f:
+        print(line.strip()) # .strip() removes leading/trailing whitespace
+</code></pre>
+
+        <h3 data-aos="slide-right">
+          Java: Powerful and Stream-Based
+        </h3>
+        <p>
+          Java's file I/O is more verbose but also more powerful, built on a system of **streams**. A stream is a sequence of data. You use different stream classes to read/write different kinds of data (bytes, characters, objects, etc.). The "try-with-resources" statement is the modern way to ensure streams are closed automatically.
+        </p>
+        <pre><code class="language-java">// Writing to a file in Java
+import java.io.FileWriter;
+import java.io.IOException;
+
+try (FileWriter writer = new FileWriter("my_java_file.txt")) {
+    writer.write("Hello from Java!\n");
+    writer.write("Another line.");
+} catch (IOException e) {
+    e.printStackTrace();
+}
+
+// Reading from a file in Java
+import java.io.BufferedReader;
+import java.io.FileReader;
+
+try (BufferedReader reader = new BufferedReader(new FileReader("my_java_file.txt"))) {
+    String line;
+    while ((line = reader.readLine()) != null) {
+        System.out.println(line);
+    }
+} catch (IOException e) {
+    e.printStackTrace();
+}
+</code></pre>
+
+        <h2 data-aos="fade-up">Day 5 Problems: Building Robust Tools</h2>
+        <p data-aos="fade-up" data-aos-delay="100">
+            Let's put theory into practice. These problems will make you think about what could go wrong and how to handle data persistence.
+        </p>
+
+        <h3>10 Python Problems: Errors and Files</h3>
+        <details>
+            <summary><h4>1. Safely get an integer from user input</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> A fundamental data validation task. Users will inevitably type "abc" when you ask for a number. This function won't crash; it will just ask again.<br/>
+                <strong>Principle:</strong> Input Validation Loop. Use a `while True` loop and a `try...except` block. If the `int()` conversion succeeds, `break` the loop. If it fails (`ValueError`), print an error and the loop continues.
+            </p>
+            <pre><code class="language-python">def get_integer_input(prompt):
+    while True:
+        try:
+            return int(input(prompt))
+        except ValueError:
+            print("Invalid input. Please enter a whole number.")
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>2. Write a list of strings to a file</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> A common task for logging, saving configuration, or exporting data.<br/>
+                <strong>Principle:</strong> File Handling with `with`. The `with open(...)` statement ensures the file is properly closed. Remember to add newline characters (`\n`) manually.
+            </p>
+            <pre><code class="language-python">def write_list_to_file(filename, data):
+    with open(filename, "w") as f:
+        for item in data:
+            f.write(item + "\n")
+</code></pre>
+        </details>
+
+        <h3>10 Java Problems: Exceptions and Streams</h3>
+        <details>
+            <summary><h4>1. Create a method that reads a file and returns its content as a string</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> A core utility function. This shows how to handle `IOException` and use a `BufferedReader` for efficient reading.<br/>
+                <strong>Principle:</strong> Checked Exceptions and Resource Management. The method must declare `throws IOException` because it's a checked exception. A `StringBuilder` is used to efficiently build the final string.
+            </p>
+            <pre><code class="language-java">import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
+public String readFileToString(String filePath) throws IOException {
+    StringBuilder contentBuilder = new StringBuilder();
+    try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        String sCurrentLine;
+        while ((sCurrentLine = br.readLine()) != null) {
+            contentBuilder.append(sCurrentLine).append("\n");
+        }
+    }
+    return contentBuilder.toString();
+}
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>2. Write a method to divide two numbers, handling division by zero</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> Demonstrates handling a specific `ArithmeticException`. Instead of crashing, the method can return a special value or throw a more specific custom exception.<br/>
+                <strong>Principle:</strong> Specific Exception Handling. Catching `ArithmeticException` is better than catching a generic `Exception` because it shows you're handling a precise, anticipated problem.
+            </p>
+            <pre><code class="language-java">public double divide(int a, int b) {
+    try {
+        return (double) a / b;
+    } catch (ArithmeticException e) {
+        System.out.println("Error: Cannot divide by zero.");
+        return Double.NaN; // Not-a-Number, a standard way to represent this
+    }
+}
+</code></pre>
+        </details>
+
+        <p class="blog-conclusion">
+          Today you gave your programs armor and a memory.<br />
+          You can now write applications that are not just correct, but also robust, reliable, and persistent.<br/>
+          Tomorrow, we put it all together. Get ready to build your first complete project.
+        </p>
+      </article>
+    </main>
+
+    <!-- MathJax for beautiful math rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        }
+      };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="../script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/intersection-observer@0.12.0/intersection-observer.js"></script>
+    <script src="blog-script.js"></script>
+  </body>
+</html>
