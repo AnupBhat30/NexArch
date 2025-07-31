@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 3: The Leap to Algorithmic Thinking - Anup's Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+    />
+    <style>
+      /* Simple styling for the dropdowns */
+      details {
+        border: 1px solid #333;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        padding: 0.5rem 1rem;
+      }
+      summary {
+        cursor: pointer;
+        font-weight: bold;
+        outline: none;
+      }
+      summary h4 {
+        display: inline-block;
+        margin: 0;
+      }
+      .quote-box {
+        background-color: #2d2d2d;
+        border-left: 4px solid #7a7cff;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        border-radius: 4px;
+      }
+      .quote-box p {
+        margin: 0;
+        font-style: italic;
+        color: #cccccc; /* Lighter color for better contrast */
+        line-height: 1.6;
+      }
+      .explanation {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        color: #000; /* Changed from grey to black */
+        font-size: 0.95rem;
+        border-left: 2px solid #555;
+        padding-left: 1rem;
+      }
+      .explanation strong {
+        color: #000; /* Changed from grey to black */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="paper"></div>
+
+    <main class="container">
+      <header class="header">
+        <a href="../index.html" class="back-link">← Back to Portfolio</a>
+        <h1>Day 3: The Leap to Algorithmic Thinking</h1>
+        <p class="blog-meta">August 2, 2025</p>
+      </header>
+
+      <article class="blog-content">
+        <p class="blog-intro">
+          Code tells the computer *what* to do.<br />
+          Algorithms tell it *how* to think.
+        </p>
+
+        <p>
+          Until now, our code has been direct. "Get this, do that, print this." Today, we transcend mere instructions. We enter the world of **algorithms**: the art and science of problem-solving. An algorithm is a recipe, a strategy, a step-by-step plan for accomplishing a task efficiently.
+        </p>
+        <p>
+          This is where computer science truly begins. It's not just about getting the right answer; it's about understanding *why* one method is thousands of times faster than another. We'll start with two of the most fundamental algorithmic concepts: **Sorting** and **Searching**. Master these, and you're no longer just a coder; you're becoming an engineer.
+        </p>
+
+        <h2 data-aos="fade-up">
+          Part 1: The Art of Sorting - Bringing Order to Chaos
+        </h2>
+        <p data-aos="fade-up" data-aos-delay="100">
+          Imagine a library with a million books, all untitled and thrown in a giant pile. Finding a specific book would be impossible. This is unsorted data. Sorting is the act of arranging that data into a meaningful order (alphabetical, numerical, chronological). It's often the first step to making sense of any large dataset.
+        </p>
+        <p data-aos="fade-up" data-aos-delay="200">
+          To appreciate the genius of modern sorting algorithms, we must first understand how to do it ourselves. Let's look at one of the simplest (and slowest) methods: **Bubble Sort**.
+        </p>
+
+        <h3 data-aos="slide-right">
+          Bubble Sort: The Slow, Methodical Plodder
+        </h3>
+        <p>
+          Bubble Sort works by repeatedly stepping through the list, comparing each pair of adjacent items and swapping them if they are in the wrong order. The pass through the list is repeated until no swaps are needed, which means the list is sorted. It's called "Bubble Sort" because the smaller or larger elements "bubble" to their correct position.
+        </p>
+        <pre><code class="language-python"># Python implementation of Bubble Sort
+def bubble_sort(arr):
+    n = len(arr)
+    # Traverse through all array elements
+    for i in range(n):
+        # Last i elements are already in place
+        for j in range(0, n-i-1):
+            # Swap if the element found is greater than the next
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+    return arr
+
+my_list = [64, 34, 25, 12, 22, 11, 90]
+print(bubble_sort(my_list)) # Output: [11, 12, 22, 25, 34, 64, 90]
+</code></pre>
+        <pre><code class="language-java">// Java implementation of Bubble Sort
+public class Sorter {
+    public static void bubbleSort(int[] arr) {
+        int n = arr.length;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    // Swap arr[j] and arr[j+1]
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] myList = {64, 34, 25, 12, 22, 11, 90};
+        bubbleSort(myList);
+        // We'll need a way to print the array to see the result
+        System.out.println(java.util.Arrays.toString(myList));
+    }
+}
+</code></pre>
+        <p>
+            Understanding Bubble Sort is crucial because it teaches you the mechanics of comparison and swapping. Now, let's see how the professionals do it.
+        </p>
+        <h3 data-aos="slide-right">
+            The Pro Move: Built-in Sorting
+        </h3>
+        <p>
+            Both Python and Java have highly optimized, lightning-fast sorting algorithms built in. You should **always** use these in real code. We learned Bubble Sort to understand the *problem*, not to use the *solution*.
+        </p>
+        <pre><code class="language-python"># Python's elegant sorting
+my_list = [64, 34, 25, 12, 22, 11, 90]
+# sorted() returns a new sorted list
+sorted_list = sorted(my_list)
+# my_list.sort() sorts the list in-place
+my_list.sort()
+</code></pre>
+        <pre><code class="language-java">// Java's powerful sorting
+import java.util.Arrays;
+
+int[] myList = {64, 34, 25, 12, 22, 11, 90};
+Arrays.sort(myList); // Sorts the array in-place
+</code></pre>
+
+        <h2 data-aos="fade-up">
+          Part 2: The Art of Searching - Finding the Needle
+        </h2>
+        <p data-aos="fade-up" data-aos-delay="100">
+          Once your data is sorted, finding things becomes dramatically easier. Searching is the process of finding a specific item within a collection of items.
+        </p>
+        <h3 data-aos="slide-right">Linear Search: The Brute-Force Method</h3>
+        <p>
+          The simplest way to search is to look at every single item, one by one, until you find what you're looking for. This is **Linear Search**. It works on any list, sorted or not.
+        </p>
+        <h3 data-aos="slide-right">Binary Search: The Power of Divide and Conquer</h3>
+        <p>
+          But what if your list is sorted? Think about finding a name in a phone book. You don't start at 'A' and read every name. You open to the middle, see if the name you want is before or after, and instantly discard half the book. You repeat this process, halving the search space each time. This is **Binary Search**. It is exponentially faster than linear search, but it **only works on sorted data**.
+        </p>
+        <pre><code class="language-python"># Python implementation of Binary Search
+def binary_search(arr, target):
+    low = 0
+    high = len(arr) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if arr[mid] < target:
+            low = mid + 1
+        elif arr[mid] > target:
+            high = mid - 1
+        else:
+            return mid # Target found
+    return -1 # Target not found
+
+# MUST be a sorted list
+sorted_arr = [11, 12, 22, 25, 34, 64, 90]
+print(binary_search(sorted_arr, 25)) # Output: 3
+</code></pre>
+        <pre><code class="language-java">// Java implementation of Binary Search
+import java.util.Arrays;
+
+public class Searcher {
+    public static int binarySearch(int[] arr, int target) {
+        int low = 0;
+        int high = arr.length - 1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2; // Avoids overflow
+            if (arr[mid] < target) {
+                low = mid + 1;
+            } else if (arr[mid] > target) {
+                high = mid - 1;
+            } else {
+                return mid; // Target found
+            }
+        }
+        return -1; // Target not found
+    }
+
+    public static void main(String[] args) {
+        int[] sortedArr = {11, 12, 22, 25, 34, 64, 90};
+        System.out.println(binarySearch(sortedArr, 25)); // Output: 3
+
+        // Or using the built-in method:
+        System.out.println(Arrays.binarySearch(sortedArr, 25)); // Output: 3
+    }
+}
+</code></pre>
+
+        <div class="quote-box">
+          <p>
+            <strong>Interview Trade Secret:</strong> "What is the Big O of this algorithm?" This question is not a suggestion. It's a demand. **Big O notation** is how we measure an algorithm's efficiency.
+            - **Linear Search is O(n):** In the worst case, you check every one of the `n` items. If the list doubles, the work doubles.
+            - **Binary Search is O(log n):** Every check cuts the remaining work in half. If the list doubles, you only have to do one more check. This is mind-bogglingly efficient. For a list of a billion items, linear search might take a billion steps. Binary search would take about 30.
+            - **Bubble Sort is O(n²):** This is terrible. If the list doubles, the work quadruples.
+            - **Good sorting algorithms (like the built-in ones) are O(n log n).** This is the gold standard for sorting.
+            Knowing these is non-negotiable for any serious engineer.
+          </p>
+        </div>
+
+        <h2 data-aos="fade-up">Day 3 Problems: Sort, Search, and Solve</h2>
+        <p data-aos="fade-up" data-aos-delay="100">
+            You've seen the theory. Now, face the fire. These problems will force you to use sorting and searching as tools to solve more complex challenges.
+        </p>
+
+        <h3>10 Python Problems: Applying Algorithms</h3>
+        <details>
+            <summary><h4>1. Find the k-th smallest element in a list</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> This is a common requirement in data analysis (e.g., finding the 95th percentile). It teaches you that sorting is often a preparatory step for other operations.<br/>
+                <strong>Principle:</strong> Sorting as a tool. Once the list is sorted, finding the k-th smallest element is trivial—it's just the element at index `k-1`. The hard work is done by the sort.
+            </p>
+            <pre><code class="language-python">def find_kth_smallest(arr, k):
+    arr.sort()
+    return arr[k-1]
+
+print(find_kth_smallest([3, 1, 4, 1, 5, 9, 2, 6], 3)) # 3rd smallest -> 2
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>2. Check if two strings are anagrams</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> This problem is a classic test of creative problem-solving. How can you tell if two things are made of the same components? By putting the components in a standard order.<br/>
+                <strong>Principle:</strong> Canonical representation. Sorting the characters of a string gives you a "canonical" (standard) form. If the canonical forms of two strings are identical, they must be anagrams.
+            </p>
+            <pre><code class="language-python">def are_anagrams(s1, s2):
+    return sorted(s1) == sorted(s2)
+
+print(are_anagrams("listen", "silent")) # Output: True
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>3. Find the intersection of two lists</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> Finding common elements is a core database and set theory operation. This problem has many solutions, but the set-based one is the most Pythonic.<br/>
+                <strong>Principle:</strong> Using the right data structure. Sets are designed for high-performance membership testing and intersection operations. Converting lists to sets makes this problem trivial.
+            </p>
+            <pre><code class="language-python">def intersection(list1, list2):
+    return list(set(list1) & set(list2))
+
+print(intersection([1, 2, 3, 4], [3, 4, 5, 6])) # Output: [3, 4]
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>4. Two Sum Problem</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> This is arguably one of the most famous interview questions of all time. It tests your ability to go from a brute-force O(n²) solution to a clever O(n) solution using a hash map.<br/>
+                <strong>Principle:</strong> Time-space tradeoff. You use extra space (the dictionary) to store what you've seen. This allows you to look up the complement (`target - num`) in O(1) time, drastically reducing the overall time complexity.
+            </p>
+            <pre><code class="language-python">def two_sum(arr, target):
+    seen = {}
+    for i, num in enumerate(arr):
+        complement = target - num
+        if complement in seen:
+            return [seen[complement], i]
+        seen[num] = i
+    return []
+
+print(two_sum([2, 7, 11, 15], 9)) # Output: [0, 1]
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>5. Find the missing number in a sequence</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> A fun brain-teaser that can be solved with math. It teaches you to look for non-obvious, more efficient solutions.<br/>
+                <strong>Principle:</strong> Gauss's summation formula. The sum of numbers from 1 to n is `n*(n+1)/2`. You can calculate the expected sum and subtract the actual sum of the list. The difference is the missing number. This is O(n) and very clever.
+            </p>
+            <pre><code class="language-python">def find_missing_number(arr):
+    n = len(arr) + 1
+    expected_sum = n * (n - 1) // 2
+    actual_sum = sum(arr)
+    return expected_sum - actual_sum
+
+print(find_missing_number([0, 1, 3])) # Output: 2
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>6. Move all zeros to the end of a list</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> This problem tests your ability to modify a list in-place while preserving the relative order of non-zero elements.<br/>
+                <strong>Principle:</strong> Two-pointer technique. One pointer (`write_idx`) keeps track of where the next non-zero element should go. You iterate through the list with another pointer, and when you find a non-zero element, you place it at `write_idx` and increment it. Finally, fill the rest of the list with zeros.
+            </p>
+            <pre><code class="language-python">def move_zeros(arr):
+    write_idx = 0
+    for read_idx in range(len(arr)):
+        if arr[read_idx] != 0:
+            arr[write_idx] = arr[read_idx]
+            write_idx += 1
+    for i in range(write_idx, len(arr)):
+        arr[i] = 0
+    return arr
+
+print(move_zeros([0, 1, 0, 3, 12])) # Output: [1, 3, 12, 0, 0]
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>7. Find the majority element</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> The element that appears more than n/2 times. A common problem in voting systems and data verification.<br/>
+                <strong>Principle:</strong> Boyer-Moore Voting Algorithm. A brilliant O(n) time, O(1) space algorithm. You maintain a `candidate` and a `count`. Iterate through the list. If `count` is 0, pick the current element as the new candidate. If the current element is the candidate, increment count; otherwise, decrement. The final candidate is the answer.
+            </p>
+            <pre><code class="language-python">def majority_element(arr):
+    candidate = None
+    count = 0
+    for num in arr:
+        if count == 0:
+            candidate = num
+        count += (1 if num == candidate else -1)
+    return candidate
+
+print(majority_element([2, 2, 1, 1, 1, 2, 2])) # Output: 2
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>8. Group anagrams together</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> A more advanced version of the anagram check. It requires you to use a dictionary to group items by a common property.<br/>
+                <strong>Principle:</strong> Hashing with canonical representation. The sorted string (canonical form) serves as the perfect key for a dictionary. You iterate through the list, find the key for each word, and append the word to the list associated with that key in the dictionary.
+            </p>
+            <pre><code class="language-python">from collections import defaultdict
+
+def group_anagrams(strs):
+    anagram_map = defaultdict(list)
+    for s in strs:
+        sorted_s = "".join(sorted(s))
+        anagram_map[sorted_s].append(s)
+    return list(anagram_map.values())
+
+print(group_anagrams(["eat", "tea", "tan", "ate", "nat", "bat"]))
+# Output: [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>9. Find the first unique character in a string</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> A common task in text processing and data streaming. It requires you to efficiently count character frequencies.<br/>
+                <strong>Principle:</strong> Frequency counting with a hash map. First, iterate through the string to build a frequency map (e.g., `{'a': 2, 'b': 1}`). Then, iterate through the string a *second* time. The first character you encounter that has a count of 1 in your map is the answer.
+            </p>
+            <pre><code class="language-python">import collections
+
+def first_uniq_char(s):
+    count = collections.Counter(s)
+    for i, char in enumerate(s):
+        if count[char] == 1:
+            return i
+    return -1
+
+print(first_uniq_char("leetcode")) # Output: 0 ('l')
+print(first_uniq_char("loveleetcode")) # Output: 2 ('v')
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>10. Merge sorted arrays</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> A fundamental sub-problem for the famous "Merge Sort" algorithm. It tests your ability to handle multiple pointers efficiently.<br/>
+                <strong>Principle:</strong> Three-pointer technique. You have one pointer for each of the two input arrays and one for the current write position in the larger (first) array. You compare the elements at the two input pointers and place the larger one at the write position, then decrement the appropriate pointers.
+            </p>
+            <pre><code class="language-python">def merge(nums1, m, nums2, n):
+    # Start from the end of both arrays
+    p1, p2, p = m - 1, n - 1, m + n - 1
+    while p1 >= 0 and p2 >= 0:
+        if nums1[p1] > nums2[p2]:
+            nums1[p] = nums1[p1]
+            p1 -= 1
+        else:
+            nums1[p] = nums2[p2]
+            p2 -= 1
+        p -= 1
+    # If there are remaining elements in nums2
+    nums1[:p2 + 1] = nums2[:p2 + 1]
+    return nums1
+
+print(merge([1,2,3,0,0,0], 3, [2,5,6], 3)) # Output: [1, 2, 2, 3, 5, 6]
+</code></pre>
+        </details>
+
+        <h3>10 Java Problems: Engineering with Efficiency</h3>
+        <details>
+            <summary><h4>1. Find k-th largest element in an array</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> The inverse of the k-th smallest. It's a simple but important check of your understanding of array indexing after sorting.<br/>
+                <strong>Principle:</strong> Sorting and indexing. Sort the array. The k-th largest element will be at index `arr.length - k`.
+            </p>
+            <pre><code class="language-java">import java.util.Arrays;
+public static int findKthLargest(int[] nums, int k) {
+    Arrays.sort(nums);
+    return nums[nums.length - k];
+}
+// To run: System.out.println(findKthLargest(new int[]{3,2,1,5,6,4}, 2)); // 5
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>2. Valid Anagram</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> The Java version forces you to think about string-to-array conversion. You can't sort a string directly in Java.<br/>
+                <strong>Principle:</strong> Canonical representation. Convert both strings to character arrays. Sort the arrays. Then, compare the sorted arrays for equality.
+            </p>
+            <pre><code class="language-java">import java.util.Arrays;
+public static boolean isAnagram(String s, String t) {
+    if (s.length() != t.length()) return false;
+    char[] sChars = s.toCharArray();
+    char[] tChars = t.toCharArray();
+    Arrays.sort(sChars);
+    Arrays.sort(tChars);
+    return Arrays.equals(sChars, tChars);
+}
+// To run: System.out.println(isAnagram("anagram", "nagaram")); // true
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>3. Intersection of Two Arrays</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> A great problem to showcase the power of Java's `HashSet` for finding common elements efficiently.<br/>
+                <strong>Principle:</strong> Set intersection. Add all elements of the first array to a `HashSet` for O(1) lookup. Then, iterate through the second array. If an element exists in the set, add it to a result set (to handle duplicates) and remove it from the original set.
+            </p>
+            <pre><code class="language-java">import java.util.HashSet;
+import java.util.Set;
+public static int[] intersection(int[] nums1, int[] nums2) {
+    Set<Integer> set1 = new HashSet<>();
+    for (int num : nums1) set1.add(num);
+
+    Set<Integer> intersectionSet = new HashSet<>();
+    for (int num : nums2) {
+        if (set1.contains(num)) {
+            intersectionSet.add(num);
+        }
+    }
+
+    int[] result = new int[intersectionSet.size()];
+    int i = 0;
+    for (int num : intersectionSet) result[i++] = num;
+    return result;
+}
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>4. Two Sum</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> The Java version of this classic problem forces you to be explicit with your `HashMap` types.<br/>
+                <strong>Principle:</strong> Time-space tradeoff with a `HashMap`. The logic is identical to the Python version. You store `(value, index)` pairs in the map. For each element, you calculate the complement and check if it's already in the map.
+            </p>
+            <pre><code class="language-java">import java.util.HashMap;
+import java.util.Map;
+public static int[] twoSum(int[] nums, int target) {
+    Map<Integer, Integer> map = new HashMap<>();
+    for (int i = 0; i < nums.length; i++) {
+        int complement = target - nums[i];
+        if (map.containsKey(complement)) {
+            return new int[] { map.get(complement), i };
+        }
+        map.put(nums[i], i);
+    }
+    throw new IllegalArgumentException("No two sum solution");
+}
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>5. Find the Duplicate Number</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> Given an array of n+1 integers where each integer is between 1 and n, find the single duplicate. This problem has a mind-bendingly clever solution.<br/>
+                <strong>Principle:</strong> Floyd's Tortoise and Hare (Cycle Detection). Treat the array as a linked list where `arr[i]` points to the next index. Because there's a duplicate, there must be a cycle. Use a slow pointer (`x = arr[x]`) and a fast pointer (`y = arr[arr[y]]`) to find the intersection point. Then, reset one pointer to the start and move both one step at a time. Where they meet again is the start of the cycle, which is the duplicate number.
+            </p>
+            <pre><code class="language-java">public static int findDuplicate(int[] nums) {
+    int slow = nums[0];
+    int fast = nums[0];
+    do {
+        slow = nums[slow];
+        fast = nums[nums[fast]];
+    } while (slow != fast);
+
+    slow = nums[0];
+    while (slow != fast) {
+        slow = nums[slow];
+        fast = nums[fast];
+    }
+    return slow;
+}
+// To run: System.out.println(findDuplicate(new int[]{1,3,4,2,2})); // 2
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>6. Product of Array Except Self</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> A tough problem that forbids using division. It forces you to think about how to accumulate products from the left and the right.<br/>
+                <strong>Principle:</strong> Prefix and Suffix Products. Create a result array. First pass: iterate from left to right, where `result[i]` is the product of all elements to the left of `i`. Second pass: iterate from right to left, multiplying `result[i]` by the product of all elements to the right of `i`. This requires a temporary variable to keep track of the running "right product".
+            </p>
+            <pre><code class="language-java">public static int[] productExceptSelf(int[] nums) {
+    int n = nums.length;
+    int[] result = new int[n];
+
+    result[0] = 1;
+    for (int i = 1; i < n; i++) {
+        result[i] = nums[i - 1] * result[i - 1];
+    }
+
+    int rightProduct = 1;
+    for (int i = n - 1; i >= 0; i--) {
+        result[i] = result[i] * rightProduct;
+        rightProduct *= nums[i];
+    }
+    return result;
+}
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>7. Squares of a Sorted Array</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> If you just square every element and then sort, you get an O(n log n) solution. But can you do it in O(n)? This problem tests your ability to use the fact that the original array is sorted.<br/>
+                <strong>Principle:</strong> Two-pointer technique from the outside in. The largest squared values will be at the ends of the original array (e.g., -10 and 10). Use a pointer at the start (`left`) and one at the end (`right`). Compare the absolute values of the elements. Place the larger square at the end of your result array and move the corresponding pointer inward.
+            </p>
+            <pre><code class="language-java">public static int[] sortedSquares(int[] nums) {
+    int n = nums.length;
+    int[] result = new int[n];
+    int left = 0, right = n - 1;
+    for (int i = n - 1; i >= 0; i--) {
+        int square;
+        if (Math.abs(nums[left]) < Math.abs(nums[right])) {
+            square = nums[right];
+            right--;
+        } else {
+            square = nums[left];
+            left++;
+        }
+        result[i] = square * square;
+    }
+    return result;
+}
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>8. Find Minimum in Rotated Sorted Array</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> A classic binary search modification. A sorted array is "rotated" (e.g., `[4,5,6,7,0,1,2]`). You have to find the minimum element in O(log n) time.<br/>
+                <strong>Principle:</strong> Modified Binary Search. The key is that one half of the array will always be sorted. Compare the middle element with the rightmost element. If `mid` is less than `right`, the minimum must be in the left half (including `mid`). Otherwise, it's in the right half. You adjust your binary search boundaries accordingly.
+            </p>
+            <pre><code class="language-java">public static int findMin(int[] nums) {
+    int left = 0, right = nums.length - 1;
+    while (left < right) {
+        int mid = left + (right - left) / 2;
+        if (nums[mid] < nums[right]) {
+            right = mid;
+        } else {
+            left = mid + 1;
+        }
+    }
+    return nums[left];
+}
+// To run: System.out.println(findMin(new int[]{3,4,5,1,2})); // 1
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>9. Contains Duplicate</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> The simplest way to check your understanding of `HashSet` for efficiency.<br/>
+                <strong>Principle:</strong> Using a Set for O(1) lookups. Iterate through the array. For each element, try to add it to a `HashSet`. The `.add()` method of a set returns `false` if the element is already present. If you get `false`, you've found a duplicate. This is an O(n) solution.
+            </p>
+            <pre><code class="language-java">import java.util.HashSet;
+import java.util.Set;
+public static boolean containsDuplicate(int[] nums) {
+    Set<Integer> set = new HashSet<>();
+    for (int num : nums) {
+        if (!set.add(num)) {
+            return true;
+        }
+    }
+    return false;
+}
+</code></pre>
+        </details>
+        <details>
+            <summary><h4>10. Search in Rotated Sorted Array</h4></summary>
+            <p class="explanation">
+                <strong>Why:</strong> The grand boss of this topic. It combines finding the rotation point with a binary search. You must find a target value in a rotated sorted array in O(log n) time.<br/>
+                <strong>Principle:</strong> Advanced Modified Binary Search. In your binary search loop, first determine which half is sorted. Is `nums[left]` <= `nums[mid]`? If so, the left half is sorted. Then, check if your target lies within the range of that sorted half. If it does, search there (`right = mid - 1`). If not, search the other half (`left = mid + 1`). Repeat this logic for the case where the right half is sorted.
+            </p>
+            <pre><code class="language-java">public static int search(int[] nums, int target) {
+    int left = 0, right = nums.length - 1;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (nums[mid] == target) return mid;
+
+        // Check if left half is sorted
+        if (nums[left] <= nums[mid]) {
+            if (target >= nums[left] && target < nums[mid]) {
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        // Else, right half is sorted
+        else {
+            if (target > nums[mid] && target <= nums[right]) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+    }
+    return -1;
+}
+</code></pre>
+        </details>
+
+        <p class="blog-conclusion">
+          Today, you stopped just writing code. You started analyzing it.<br />
+          You learned that how you solve a problem matters as much as the solution itself.<br/>
+          This is the engine of a real software engineer. Never lose it.
+        </p>
+      </article>
+    </main>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [
+            ["$", "$"],
+            ["\\(", "\\)"],
+          ],
+          displayMath: [
+            ["$$", "$$"],
+            ["\\[", "\\]"],
+          ],
+        },
+      };
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="../script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/intersection-observer@0.12.0/intersection-observer.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize AOS animations
+        AOS.init({
+          duration: 800,
+          easing: "ease-in-out",
+          once: true,
+          offset: 100,
+        });
+
+        // Reading Progress Bar
+        function createProgressBar() {
+          const progressBar = document.createElement("div");
+          progressBar.id = "reading-progress";
+          progressBar.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #7a7cff, #00d4ff);
+            z-index: 9999;
+            transition: width 0.3s ease;
+          `;
+          document.body.appendChild(progressBar);
+
+          window.addEventListener("scroll", () => {
+            const windowHeight =
+              document.documentElement.scrollHeight -
+              document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            progressBar.style.width = scrolled + "%";
+          });
+        }
+        createProgressBar();
+
+        // Copy Code Button for all code blocks
+        function addCopyButtons() {
+          document.querySelectorAll("pre code").forEach((codeBlock) => {
+            const pre = codeBlock.parentNode;
+            const button = document.createElement("button");
+            button.textContent = "📋 Copy";
+            button.className = "copy-btn";
+            button.style.cssText = `
+              position: absolute;
+              top: 8px;
+              right: 8px;
+              padding: 4px 8px;
+              background: rgba(255, 255, 255, 0.1);
+              color: #fff;
+              border: 1px solid rgba(255, 255, 255, 0.2);
+              border-radius: 4px;
+              cursor: pointer;
+              font-size: 12px;
+              transition: all 0.2s ease;
+            `;
+
+            pre.style.position = "relative";
+
+            button.addEventListener("click", async () => {
+              try {
+                await navigator.clipboard.writeText(codeBlock.textContent);
+                button.textContent = "✅ Copied!";
+                button.style.background = "rgba(34, 197, 94, 0.2)";
+                setTimeout(() => {
+                  button.textContent = "📋 Copy";
+                  button.style.background = "rgba(255, 255, 255, 0.1)";
+                }, 2000);
+              } catch (err) {
+                button.textContent = "❌ Failed";
+                setTimeout(() => {
+                  button.textContent = "📋 Copy";
+                }, 2000);
+              }
+            });
+
+            pre.appendChild(button);
+          });
+        }
+
+        // Estimated Reading Time
+        function addReadingTime() {
+          const content = document.querySelector(".blog-content");
+          const text = content.textContent;
+          const wordsPerMinute = 200;
+          const wordCount = text.trim().split(/\s+/).length;
+          const readingTime = Math.ceil(wordCount / wordsPerMinute);
+
+          const readingTimeElement = document.createElement("p");
+          readingTimeElement.className = "reading-time";
+          readingTimeElement.innerHTML = `📖 ${readingTime} min read • ${wordCount.toLocaleString()} words`;
+          readingTimeElement.style.cssText = `
+            color: #888;
+            font-size: 0.9em;
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+          `;
+
+          const blogMeta = document.querySelector(".blog-meta");
+          blogMeta.parentNode.insertBefore(
+            readingTimeElement,
+            blogMeta.nextSibling
+          );
+        }
+
+        // Function to process markdown in text content (enhanced)
+        function processMarkdown(element) {
+          const walker = document.createTreeWalker(
+            element,
+            NodeFilter.SHOW_TEXT,
+            null,
+            false
+          );
+
+          const textNodes = [];
+          let node;
+          while ((node = walker.nextNode())) {
+            textNodes.push(node);
+          }
+
+          textNodes.forEach((textNode) => {
+            let text = textNode.textContent;
+            let hasMarkdown = false;
+
+            // Enhanced markdown patterns
+            if (
+              text.includes("**") ||
+              text.includes("`") ||
+              text.includes("*") ||
+              text.includes("~~")
+            ) {
+              hasMarkdown = true;
+
+              // Convert markdown to HTML with more patterns
+              text = text.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+              text = text.replace(/`([^`]+)`/g, "<code>$1</code>");
+              text = text.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+              text = text.replace(/~~([^~]+)~~/g, "<del>$1</del>"); // Strikethrough
+            }
+
+            if (hasMarkdown) {
+              const temp = document.createElement("span");
+              temp.innerHTML = text;
+
+              const parent = textNode.parentNode;
+              while (temp.firstChild) {
+                parent.insertBefore(temp.firstChild, textNode);
+              }
+              parent.removeChild(textNode);
+            }
+          });
+        }
+
+        // Back to Top Button
+        function addBackToTop() {
+          const backToTop = document.createElement("button");
+          backToTop.innerHTML = "↑";
+          backToTop.className = "back-to-top";
+          backToTop.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7a7cff, #00d4ff);
+            color: white;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(122, 124, 255, 0.3);
+          `;
+
+          document.body.appendChild(backToTop);
+
+          window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) {
+              backToTop.style.opacity = "1";
+              backToTop.style.visibility = "visible";
+            } else {
+              backToTop.style.opacity = "0";
+              backToTop.style.visibility = "hidden";
+            }
+          });
+
+          backToTop.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          });
+        }
+
+        // Table of Contents Generator
+        function generateTOC() {
+          const headings = document.querySelectorAll("h2, h3, h4");
+          if (headings.length < 3) return; // Only create TOC if there are enough headings
+
+          const toc = document.createElement("div");
+          toc.className = "table-of-contents";
+          toc.innerHTML = "<h3>📚 Table of Contents</h3>";
+
+          const tocList = document.createElement("ul");
+          tocList.style.cssText = `
+            list-style: none;
+            padding-left: 0;
+            margin: 1rem 0;
+          `;
+
+          headings.forEach((heading, index) => {
+            const id = `heading-${index}`;
+            heading.id = id;
+
+            const listItem = document.createElement("li");
+            const link = document.createElement("a");
+            link.href = `#${id}`;
+            link.textContent = heading.textContent;
+            link.style.cssText = `
+              color: #7a7cff;
+              text-decoration: none;
+              padding: 0.25rem 0;
+              display: block;
+              border-left: 2px solid transparent;
+              padding-left: ${
+                heading.tagName === "H2"
+                  ? "0"
+                  : heading.tagName === "H3"
+                  ? "1rem"
+                  : "2rem"
+              };
+              transition: all 0.2s ease;
+            `;
+
+            link.addEventListener("mouseenter", () => {
+              link.style.borderLeftColor = "#7a7cff";
+              link.style.paddingLeft = `calc(${link.style.paddingLeft} + 0.5rem)`;
+            });
+
+            link.addEventListener("mouseleave", () => {
+              link.style.borderLeftColor = "transparent";
+              link.style.paddingLeft = `${
+                heading.tagName === "H2"
+                  ? "0"
+                  : heading.tagName === "H3"
+                  ? "1rem"
+                  : "2rem"
+              }`;
+            });
+
+            listItem.appendChild(link);
+            tocList.appendChild(listItem);
+          });
+
+          toc.appendChild(tocList);
+          toc.style.cssText = `
+            background: rgba(122, 124, 255, 0.1);
+            border: 1px solid rgba(122, 124, 255, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(10px);
+          `;
+
+          // Insert TOC after the intro paragraph
+          const intro = document.querySelector(".blog-intro");
+          intro.parentNode.insertBefore(toc, intro.nextSibling.nextSibling);
+        }
+
+        // Initialize all features
+        setTimeout(() => {
+          addReadingTime();
+          addCopyButtons();
+          addBackToTop();
+          generateTOC();
+
+          // Process markdown in all relevant elements
+          const paragraphs = document.querySelectorAll(
+            "p, summary, li, .explanation"
+          );
+          paragraphs.forEach(processMarkdown);
+
+          // Re-run Prism highlighting after markdown conversion
+          if (typeof Prism !== 'undefined') {
+            Prism.highlightAll();
+          }
+
+          // Re-render MathJax if available
+          if (window.MathJax) {
+            MathJax.typesetPromise();
+          }
+        }, 100);
+
+        // Add smooth scrolling for all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute("href"));
+            if (target) {
+              target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
