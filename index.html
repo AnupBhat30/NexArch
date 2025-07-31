@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NexArch - Software Engineering Career Development</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="paper"></div>
+
+    <header>
+      <h1 class="typewriter">NexArch</h1>
+      <p class="subtitle">
+        Daily Programming Deep-Dives with Real-World Applications
+      </p>
+      <div class="contact-links">
+        <a href="#about">About</a>
+        <span>·</span>
+        <a href="#roadmap">Week 1</a>
+        <span>·</span>
+        <a href="#blog">Blog</a>
+        <span>·</span>
+        <a href="#contact">Contact</a>
+      </div>
+    </header>
+
+    <section id="about" style="animation-delay: 0.2s">
+      <h2>About</h2>
+      <p class="about-text">
+        NexArch creates
+        <strong>daily programming blogs with in-depth code explanations</strong
+        >, hands-on projects, and insider tips to empower participants
+        transitioning from
+        <span class="highlight"
+          >college-level knowledge to job-ready status</span
+        >
+        for high-paying roles. We emphasize
+        <em>human-centric learning over AI reliance</em> to foster true
+        problem-solving abilities, <u>portfolio-building</u>, and
+        <u>interview confidence</u>. Every project connects to
+        <strong>real-world applications</strong> - you're not coding for the
+        sake of coding, but building tools you'll actually use. Week 1 kicks off
+        with a programming deep-dive into
+        <em>Python (interpreted language for rapid prototyping)</em> and
+        <em>Java (compiled language for structured development)</em>, featuring
+        day-by-day setups, variable handling, data types, basic I/O, and control
+        structures, all explained through technical theory and line-by-line code
+        breakdowns.
+      </p>
+      <p class="quote">
+        "The best way to learn programming is to write programs that solve real
+        problems you actually care about." — Adapted from programming wisdom
+      </p>
+    </section>
+
+    <section id="roadmap" style="animation-delay: 0.4s">
+      <h2>Week 1: Programming Foundations Deep-Dive</h2>
+
+      <div class="blog-filters">
+        <button class="filter-btn active" data-filter="all">All Days</button>
+        <button class="filter-btn" data-filter="python">Python</button>
+        <button class="filter-btn" data-filter="java">Java</button>
+        <button class="filter-btn" data-filter="theory">Theory</button>
+      </div>
+
+      <article class="blog-post" data-category="theory">
+        <h3>
+          <a href="blogs/week1-day1.html"
+            >Day 1: Python vs Java - Why Both Matter in Real Development</a
+          >
+        </h3>
+        <p class="blog-meta">July 31, 2025 · Theory · Language Fundamentals</p>
+        <p class="blog-excerpt">
+          Understanding when to choose Python (interpreted, rapid prototyping)
+          versus Java (compiled, structured development). Real-world scenario:
+          Netflix uses Python for data analysis and recommendation algorithms,
+          while their backend streaming infrastructure runs on Java. We'll set
+          up both environments and explore why companies use different tools for
+          different problems.
+        </p>
+        <div class="blog-tags">
+          <span class="tag">Environment Setup</span>
+          <span class="tag">Language Comparison</span>
+          <span class="tag">Industry Applications</span>
+        </div>
+        <a href="blogs/week1-day1.html" class="read-more">Read Full Blog →</a>
+      </article>
+    </section>
+
+    <section id="blog" style="animation-delay: 0.6s">
+      <h2>Daily Programming Insights</h2>
+      <p>
+        Get daily in-depth code explanations, hands-on projects, and real-world
+        programming insights delivered straight to your inbox. Start with Week
+        1's Python vs Java deep-dive.
+      </p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="your.email@example.com" required />
+        <button type="submit">Start Week 1 Challenge</button>
+      </form>
+    </section>
+
+    <section id="contact" style="animation-delay: 0.8s">
+      <h2>Connect</h2>
+      <p class="about-text">
+        Ready to transform your career? Have questions about the program? Want
+        to share your success story? Let's connect and build the next generation
+        of confident software engineers together.
+      </p>
+      <div class="links">
+        <a href="mailto:hello@nexarch.dev" target="_blank">Email</a>
+        <a href="#" target="_blank">Twitter</a>
+        <a href="#" target="_blank">LinkedIn</a>
+        <a href="#" target="_blank">Discord Community</a>
+      </div>
+    </section>
+
+    <footer>
+      <p>
+        © 2025 NexArch. Empowering aspiring developers to build industry-ready
+        careers.
+      </p>
+      <button class="theme-toggle" onclick="toggleTheme()">◐</button>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
