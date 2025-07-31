@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 2: From Commands to Creations - Anup's Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+    />
+    <style>
+      /* Simple styling for the dropdowns */
+      details {
+        border: 1px solid #333;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        padding: 0.5rem 1rem;
+      }
+      summary {
+        cursor: pointer;
+        font-weight: bold;
+        outline: none;
+      }
+      summary h4 {
+        display: inline-block;
+        margin: 0;
+      }
+      .quote-box {
+        background-color: #2d2d2d;
+        border-left: 4px solid #7a7cff;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        border-radius: 4px;
+      }
+      .quote-box p {
+        margin: 0;
+        font-style: italic;
+        color: #cccccc; /* Lighter color for better contrast */
+        line-height: 1.6;
+      }
+      .explanation {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        color: #000; /* Changed from grey to black */
+        font-size: 0.95rem;
+        border-left: 2px solid #555;
+        padding-left: 1rem;
+      }
+      .explanation strong {
+        color: #000; /* Changed from grey to black */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="paper"></div>
+
+    <main class="container">
+      <header class="header">
+        <a href="../index.html" class="back-link">← Back to Portfolio</a>
+        <h1>Day 2: From Commands to Creations</h1>
+        <p class="blog-meta">August 1, 2025</p>
+      </header>
+
+      <article class="blog-content">
+        <p class="blog-intro">
+          If Day 1 was learning words,<br />
+          today we start writing sentences.
+        </p>
+
+        <p>
+          Yesterday, you wrote individual commands. You told the computer what
+          to do, one line at a time. Today, we level up. We stop being mere
+          operators and start becoming architects. We're going to learn how to
+          build reusable tools (<strong>functions</strong>) and how to organize
+          information in intelligent containers (<strong>data structures</strong
+          >).
+        </p>
+        <p>
+          This is the most crucial leap in a programmer's journey. It’s the
+          difference between knowing how to use a hammer and knowing how to
+          build a house. Pay close attention, because the concepts you learn
+          today are the foundation of every complex application you will ever
+          build.
+        </p>
+
+        <h2 data-aos="fade-up">
+          Part 1: Functions - The Art of Building Reusable Tools
+        </h2>
+        <p data-aos="fade-up" data-aos-delay="100">
+          Imagine you're making coffee. Every morning, you perform the same
+          steps: get beans, grind them, add water, brew. Now, imagine having to
+          write down those ten steps every single time you wanted coffee. It
+          would be tedious and error-prone. What if you could just write down
+          the recipe once, name it "Make Coffee," and then whenever you need it,
+          you just say "Execute: Make Coffee"?
+        </p>
+        <p data-aos="fade-up" data-aos-delay="200">
+          That is exactly what a function is. It’s a named block of code that
+          performs a specific task. You define it once, and you can call it a
+          million times. This is the heart of the **DRY (Don't Repeat
+          Yourself)** principle, a cornerstone of good software design.
+        </p>
+
+        <h3 data-aos="slide-right">
+          Python Functions: Effortless and Flexible
+        </h3>
+        <p>
+          Python makes creating functions feel natural. You use the `def`
+          keyword (for "define"), give your function a name, specify what
+          ingredients it needs (<strong>parameters</strong>), and what it
+          produces (a <strong>return</strong> value).
+        </p>
+        <pre><code class="language-python"># A function that takes two numbers and returns their sum
+def add_numbers(num1, num2):
+  # num1 and num2 are parameters
+  result = num1 + num2
+  return result # This is the output
+
+# Now we call the function with arguments
+sum_value = add_numbers(5, 10) # sum_value is now 15
+</code></pre>
+
+        <h3 data-aos="slide-right">Java Methods: Structured and Safe</h3>
+        <p data-aos="fade-up" data-aos-delay="100">
+          Java is more formal. Functions are called <strong>methods</strong>,
+          and they must live inside a class. Java's strictness is a feature, not
+          a bug—it forces you to be explicit about what kind of data your method
+          accepts and what it returns. This catches errors before your code even
+          runs.
+        </p>
+        <pre><code class="language-java">public class Calculator {
+  // public static: Don't worry about these for now.
+  // int: This method MUST return an integer.
+  // addNumbers: The method name.
+  // (int num1, int num2): It MUST accept two integers.
+  public static int addNumbers(int num1, int num2) {
+    int result = num1 + num2;
+    return result;
+  }
+
+  public static void main(String[] args) {
+    int sumValue = addNumbers(5, 10); // sumValue is 15
+  }
+}
+</code></pre>
+        <div class="quote-box">
+          <p>
+            <strong>Interview Trade Secret:</strong> In a coding interview,
+            before you write a single line of a function, state its purpose out
+            loud. Say, "Okay, I'm going to write a function called `findMax`. It
+            will take a list of integers as input and will return a single
+            integer, which is the largest number in that list." This shows the
+            interviewer you think like an architect—you define the contract
+            before you start building. It's a massive green flag.
+          </p>
+        </div>
+
+        <h2 data-aos="fade-up">
+          Part 2: Data Structures - Organizing the Chaos
+        </h2>
+        <p data-aos="fade-up" data-aos-delay="100">
+          So far, we've mostly dealt with single pieces of data—one number, one
+          string. But the real world is messy. You have a list of users, a
+          collection of products, a dictionary of settings. Data structures are
+          specialized containers designed to hold and organize this data
+          efficiently. We'll start with the two most important ones.
+        </p>
+        <h3 data-aos="slide-right">Lists & Arrays: The Ordered Shelf</h3>
+        <p>
+          Think of a list (in Python) or an array (in Java) as a shelf with
+          numbered slots. It's an <strong>ordered</strong> collection. The first
+          item is in slot 0, the second in slot 1, and so on. This order is
+          guaranteed. You use them when the sequence matters, like steps in a
+          recipe or chronological log entries.
+        </p>
+        <pre><code class="language-python"># Python List
+my_list = ["apple", "banana", "cherry"]
+print(my_list[0]) # Access by index -> "apple"
+my_list.append("date") # Add to the end
+</code></pre>
+        <pre><code class="language-java">// Java Array (fixed size)
+String[] myArray = {"apple", "banana", "cherry"};
+System.out.println(myArray[0]); // -> "apple"
+
+// Java ArrayList (dynamic size)
+import java.util.ArrayList;
+ArrayList&lt;String&gt; myList = new ArrayList&lt;&gt;();
+myList.add("apple");
+</code></pre>
+
+        <h3 data-aos="slide-right">
+          Dictionaries & HashMaps: The Labeled Drawer
+        </h3>
+        <p data-aos="fade-up" data-aos-delay="100">
+          What if the order doesn't matter, but you need to find things fast?
+          You wouldn't organize your contacts by the order you met them; you'd
+          organize them by name. A dictionary (Python) or HashMap (Java) is a
+          container for <strong>key-value pairs</strong>. You give each piece of
+          data a unique label (a <strong>key</strong>), and you use that key to
+          retrieve the data (the <strong>value</strong>) instantly.
+        </p>
+        <pre><code class="language-python"># Python Dictionary
+user = {
+  "name": "Alice",
+  "id": 123,
+  "is_active": True
+}
+print(user["name"]) # Access by key -> "Alice"
+</code></pre>
+        <pre><code class="language-java">// Java HashMap
+import java.util.HashMap;
+HashMap&lt;String, Object&gt; user = new HashMap&lt;&gt;();
+user.put("name", "Alice");
+user.put("id", 123);
+System.out.println(user.get("name")); // -> "Alice"
+</code></pre>
+        <div class="quote-box">
+          <p>
+            <strong>Interview Trade Secret:</strong> "When should you use a List
+            vs. a Dictionary?" This is a top-tier question. The answer reveals
+            your understanding of efficiency (Big O notation).
+            <strong>The short answer:</strong> Use a
+            <strong>List/Array</strong> when the order of items is important or
+            you need to access them by their numerical position. Use a
+            <strong>Dictionary/HashMap</strong> when you need to look up items
+            quickly using a unique identifier. Finding an item in a list takes,
+            on average, more time as the list gets bigger (O(n)). Finding an
+            item in a dictionary is, on average, instantaneous, no matter how
+            big it gets (O(1)).
+          </p>
+        </div>
+
+        <h2 data-aos="fade-up">Day 2 Problems: Let's Build</h2>
+        <p data-aos="fade-up" data-aos-delay="100">
+          Theory is the map; coding is the journey. Let's apply these concepts.
+          Solve these problems yourself first. The struggle is where the
+          learning happens.
+        </p>
+
+        <h3>10 Python Problems: Functions & Lists</h3>
+        <details>
+          <summary>
+            <h4>Write a function to sum all items in a list</h4>
+          </summary>
+          <p class="explanation">
+            <strong>Why:</strong> This is the "Hello, World!" of data
+            processing. You're taking a pile of things (numbers) and boiling
+            them down to one piece of information (the total). It's the core of
+            every sales report, game score, or data analysis you'll ever do.<br /><strong
+              >Principle:</strong
+            >
+            Encapsulation. By putting this logic in a function, you create a
+            reliable, reusable tool. The Pythonic `sum()` is your reward for
+            understanding the concept—a shortcut built by experts.
+          </p>
+          <pre><code class="language-python">def sum_list(items):
+    # The built-in sum() is efficient and clean.
+    return sum(items)
+
+print(sum_list([1, 2, 10, 20]))  # Output: 33</code></pre>
+        </details>
+
+        <details>
+          <summary>
+            <h4>Write a function to find the maximum in a list</h4>
+          </summary>
+          <p class="explanation">
+            <strong>Why:</strong> Finding extremes is a constant need—the
+            highest score, the most expensive item, the peak traffic hour. This
+            teaches you how to inspect a collection and keep track of a "winner"
+            as you go.<br /><strong>Principle:</strong> State management. The
+            `max` variable holds the "state" of the highest value found so far.
+            Again, Python's `max()` is the elegant shortcut.
+          </p>
+          <pre><code class="language-python">def max_in_list(items):
+    # Let Python do the heavy lifting.
+    return max(items)
+
+print(max_in_list([10, 20, 4, 45, 99]))  # Output: 99</code></pre>
+        </details>
+
+        <details>
+          <summary>
+            <h4>Write a function to multiply all numbers in a list</h4>
+          </summary>
+          <p class="explanation">
+            <strong>Why:</strong> This reinforces the concept of aggregation,
+            but with a twist. It's used in calculating compound interest or
+            statistical probabilities.<br /><strong>Principle:</strong>
+            Initialization is key. You start with `1`, not `0`, because
+            multiplying by zero wipes everything out. This teaches you to think
+            about the identity element for an operation.
+          </p>
+          <pre><code class="language-python">import math
+
+def multiply_list(items):
+    # math.prod is a clean way to do this since Python 3.8
+    # For a manual approach:
+    # total = 1
+    # for x in items:
+    #   total *= x
+    # return total
+    return math.prod(items)
+
+print(multiply_list([1, 2, 3, 4]))  # Output: 24</code></pre>
+        </details>
+
+        <details>
+          <summary><h4>Write a function to reverse a string</h4></summary>
+          <p class="explanation">
+            <strong>Why:</strong> Reversing data is a classic algorithmic
+            pattern. It's a building block for checking palindromes and
+            processing data streams that arrive in reverse order.<br /><strong
+              >Principle:</strong
+            >
+            Python's slicing `[::-1]` is legendary for its conciseness. It's a
+            powerful feature that abstracts away the manual loop and swap logic,
+            making your code more readable.
+          </p>
+          <pre><code class="language-python">def reverse_string(s):
+    return s[::-1]
+
+print(reverse_string("hello"))  # Output: "olleh"</code></pre>
+        </details>
+
+        <details>
+          <summary>
+            <h4>Write a function to check if a list is empty</h4>
+          </summary>
+          <p class="explanation">
+            <strong>Why:</strong> This is defensive programming. Before you try
+            to process data, you must ensure data exists. This simple check
+            prevents countless errors.<br /><strong>Principle:</strong>
+            "Truthiness". In Python, empty collections are considered `False` in
+            a boolean context. `not items` is a clean, Pythonic way to check for
+            emptiness.
+          </p>
+          <pre><code class="language-python">def is_empty(items):
+    return not items
+
+print(is_empty([]))  # Output: True
+print(is_empty([1, 2])) # Output: False</code></pre>
+        </details>
+
+        <details>
+          <summary><h4>Write a function to clone or copy a list</h4></summary>
+          <p class="explanation">
+            <strong>Why:</strong> To avoid chaos. If you pass a list to a
+            function and modify it, you've changed the original list everywhere
+            in your program. Cloning creates a safe sandbox to work in.<br /><strong
+              >Principle:</strong
+            >
+            Pass-by-reference vs. Pass-by-value. Python passes mutable objects
+            like lists by reference. Slicing `[:]` or using the `.copy()` method
+            creates a shallow copy, which is what you want 95% of the time.
+          </p>
+          <pre><code class="language-python">def clone_list(items):
+    return items.copy() # or items[:]
+
+original = [1, 2, 3]
+cloned = clone_list(original)
+print(cloned)  # Output: [1, 2, 3]</code></pre>
+        </details>
+
+        <details>
+          <summary>
+            <h4>Write a function to remove duplicates from a list</h4>
+          </summary>
+          <p class="explanation">
+            <strong>Why:</strong> Data cleaning 101. You often only want to deal
+            with unique items: a list of unique users, unique tags, etc.<br /><strong
+              >Principle:</strong
+            >
+            Using the right tool for the job. A `set` is a data structure
+            designed for uniqueness. The pattern is to convert the list to a set
+            to instantly discard duplicates, then convert it back to a list.
+          </p>
+          <pre><code class="language-python">def remove_duplicates(items):
+    return list(set(items))
+
+print(remove_duplicates([1, 2, 2, 3, 4, 4, 4]))  # Output: [1, 2, 3, 4]</code></pre>
+        </details>
+
+        <details>
+          <summary><h4>Write a function to flatten a nested list</h4></summary>
+          <p class="explanation">
+            <strong>Why:</strong> Real-world data is rarely flat. It comes from
+            JSON APIs or databases in nested structures. Flattening it is often
+            the first step before you can process it.<br /><strong
+              >Principle:</strong
+            >
+            List comprehensions. This is advanced Python syntax that lets you
+            build a new list based on existing ones. The nested `for` loops
+            inside the brackets are a compact and highly efficient way to unwrap
+            the structure.
+          </p>
+          <pre><code class="language-python">def flatten(nested_list):
+    return [item for sublist in nested_list for item in sublist]
+
+print(flatten([[1, 2], [3, 4], [5]]))  # Output: [1, 2, 3, 4, 5]</code></pre>
+        </details>
+
+        <details>
+          <summary>
+            <h4>Write a function to filter even numbers from a list</h4>
+          </summary>
+          <p class="explanation">
+            <strong>Why:</strong> Filtering is the essence of data science and
+            backend logic. You're constantly selecting data based on
+            conditions—users who are active, products that are in stock, etc.<br /><strong
+              >Principle:</strong
+            >
+            Conditional logic within comprehensions. Adding an `if` clause to a
+            list comprehension creates a powerful, readable, one-line filter.
+          </p>
+          <pre><code class="language-python">def filter_evens(items):
+    return [x for x in items if x % 2 == 0]
+
+print(filter_evens([1, 2, 3, 4, 5, 6]))  # Output: [2, 4, 6]</code></pre>
+        </details>
+
+        <details>
+          <summary>
+            <h4>Write a function to count occurrences of an element</h4>
+          </summary>
+          <p class="explanation">
+            <strong>Why:</strong> Frequency analysis is fundamental. How many
+            times did a user log in? What's the most popular item? This is the
+            root of that analysis.<br /><strong>Principle:</strong> Leverage
+            built-in methods. Most languages provide optimized tools for common
+            tasks. `.count()` is Python's gift to you for this specific problem.
+          </p>
+          <pre><code class="language-python">def count_occurrence(items, target):
+    return items.count(target)
+
+print(count_occurrence([1, 1, 2, 2, 2, 3], 2))  # Output: 3</code></pre>
+        </details>
+
+        <h3>10 Java Problems: Methods & Arrays</h3>
+        <details>
+          <summary><h4>Write a method to find the sum of an array</h4></summary>
+          <p class="explanation">
+            <strong>Why:</strong> This is Java's take on aggregation. It forces
+            you to be explicit: declare the sum, loop through the array, and
+            return the result. It builds discipline.<br /><strong
+              >Principle:</strong
+            >
+            Explicit iteration. The `for-each` loop (`for (int num : arr)`) is a
+            clean way to visit every element without worrying about indices.
+          </p>
+          <pre><code class="language-java">public static int sumArray(int[] arr) {
+    int sum = 0;
+    for (int num : arr) {
+        sum += num;
+    }
+    return sum;
+}
+// To run: System.out.println(sumArray(new int[]{1, 2, 3}));  // Output: 6</code></pre>
+        </details>
+
+        <details>
+          <summary>
+            <h4>Write a method to find the largest element in an array</h4>
+          </summary>
+          <p class="explanation">
+            <strong>Why:</strong> In Java, you manage the state yourself. This
+            problem teaches you to initialize a "max" variable and then
+            challenge it with every other element in the array.<br /><strong
+              >Principle:</strong
+            >
+            Robust initialization. Starting with `arr[0]` is better than `0`,
+            because it correctly handles arrays of all negative numbers.
+          </p>
+          <pre><code class="language-java">public static int maxInArray(int[] arr) {
+    if (arr == null || arr.length == 0) {
+        throw new IllegalArgumentException("Array cannot be empty.");
+    }
+    int max = arr[0];
+    for (int i = 1; i < arr.length; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+    return max;
+}
+// To run: System.out.println(maxInArray(new int[]{10, 20, 5}));  // Output: 20</code></pre>
+        </details>
+
+        <details>
+          <summary>
+            <h4>Write a method to reverse an array in-place</h4>
+          </summary>
+          <p class="explanation">
+            <strong>Why:</strong> This is a classic interview question that
+            tests your understanding of memory. "In-place" means you modify the
+            original array without creating a new one, saving memory.<br /><strong
+              >Principle:</strong
+            >
+            Two-pointer technique. You have one pointer at the start and one at
+            the end. You swap their values and move them towards the center
+            until they meet.
+          </p>
+          <pre><code class="language-java">public static void reverseArray(int[] arr) {
+    int start = 0;
+    int end = arr.length - 1;
+    while (start < end) {
+        int temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+        start++;
+        end--;
+    }
+}
+// To run: int[] arr = {1, 2, 3}; reverseArray(arr); System.out.println(java.util.Arrays.toString(arr)); // [3, 2, 1]</code></pre>
+        </details>
+
+        <details>
+          <summary>
+            <h4>
+              Write a method to check if an array contains a specific value
+            </h4>
+          </summary>
+          <p class="explanation">
+            <strong>Why:</strong> Searching is one of the fundamental operations
+            in computer science. This is the simplest form: a linear scan.<br /><strong
+              >Principle:</strong
+            >
+            Early exit. The moment you find the value, you `return true`.
+            There's no need to check the rest of the array. This is a basic
+            optimization.
+          </p>
+          <pre><code class="language-java">public static boolean contains(int[] arr, int value) {
+    for (int num : arr) {
+        if (num == value) {
+            return true;
+        }
+    }
+    return false;
+}
+// To run: System.out.println(contains(new int[]{1, 2, 3}, 2));  // true</code></pre>
+        </details>
+
+        <details>
+          <summary><h4>Write a method to copy an array</h4></summary>
+          <p class="explanation">
+            <strong>Why:</strong> Like in Python, you need to protect your
+            original data. In Java, arrays are objects, so just assigning `int[]
+            copy = original;` does NOT create a copy; it just points two
+            variables to the same place in memory.<br /><strong
+              >Principle:</strong
+            >
+            Explicit allocation. You must create a `new` array of the same size
+            and then manually copy each element over.
+          </p>
+          <pre><code class="language-java">public static int[] copyArray(int[] arr) {
+    int[] copy = new int[arr.length];
+    for (int i = 0; i < arr.length; i++) {
+        copy[i] = arr[i];
+    }
+    return copy;
+    // Shortcut: return arr.clone(); or java.util.Arrays.copyOf(arr, arr.length);
+}
+// To run: int[] original = {1, 2, 3}; int[] copied = copyArray(original);</code></pre>
+        </details>
+
+        <details>
+          <summary>
+            <h4>Write a method to find duplicate elements in an array</h4>
+          </summary>
+          <p class="explanation">
+            <strong>Why:</strong> This is a common data validation task. The
+            brute-force approach teaches you about nested loops and quadratic
+            complexity (O(n²)).<br /><strong>Principle:</strong> Algorithmic
+            complexity. The nested loop is simple to write but slow for large
+            arrays. This plants the seed for learning more efficient solutions
+            later (like using a `HashSet`).
+          </p>
+          <pre><code class="language-java">public static void findDuplicates(int[] arr) {
+    // This is an O(n^2) solution. Better solutions exist with HashSets.
+    for (int i = 0; i < arr.length; i++) {
+        for (int j = i + 1; j < arr.length; j++) {
+            if (arr[i] == arr[j]) {
+                System.out.println("Duplicate found: " + arr[i]);
+            }
+        }
+    }
+}
+// To run: findDuplicates(new int[]{1, 2, 2, 3, 3});  // Prints 2 and 3</code></pre>
+        </details>
+
+        <details>
+          <summary>
+            <h4>Write a method to rotate an array left by one position</h4>
+          </summary>
+          <p class="explanation">
+            <strong>Why:</strong> This simulates operations in data structures
+            like queues. It's about shifting a whole collection of data
+            efficiently.<br /><strong>Principle:</strong> Managing state with a
+            temporary variable. You have to "save" the first element before you
+            start overwriting it, then place it at the end.
+          </p>
+          <pre><code class="language-java">public static void rotateLeft(int[] arr) {
+    if (arr.length <= 1) return;
+    int first = arr[0];
+    for (int i = 0; i < arr.length - 1; i++) {
+        arr[i] = arr[i + 1];
+    }
+    arr[arr.length - 1] = first;
+}
+// To run: int[] arr = {1, 2, 3}; rotateLeft(arr); // arr is now {2, 3, 1}</code></pre>
+        </details>
+
+        <details>
+          <summary>
+            <h4>Write a method to compute the average of array elements</h4>
+          </summary>
+          <p class="explanation">
+            <strong>Why:</strong> A fundamental statistical calculation. It
+            combines summation with division.<br /><strong>Principle:</strong>
+            Type casting. In Java, dividing an integer by an integer results in
+            an integer (truncating any decimal). You must cast one of the
+            numbers to a `double` to force floating-point division and get an
+            accurate average.
+          </p>
+          <pre><code class="language-java">public static double average(int[] arr) {
+    // Reusing our own function!
+    int sum = 0;
+    for (int num : arr) sum += num;
+    return (double) sum / arr.length;
+}
+// To run: System.out.println(average(new int[]{1, 2, 3}));  // 2.0</code></pre>
+        </details>
+
+        <details>
+          <summary><h4>Write a method to merge two arrays</h4></summary>
+          <p class="explanation">
+            <strong>Why:</strong> Combining datasets is a universal need. This
+            is the low-level implementation of that task.<br /><strong
+              >Principle:</strong
+            >
+            Manual memory management. You have to calculate the total required
+            size, create a new array, and then carefully copy both source arrays
+            into the correct positions in the destination array.
+          </p>
+          <pre><code class="language-java">public static int[] mergeArrays(int[] a, int[] b) {
+    int[] merged = new int[a.length + b.length];
+    System.arraycopy(a, 0, merged, 0, a.length);
+    System.arraycopy(b, 0, merged, a.length, b.length);
+    return merged;
+}
+// To run: int[] merged = mergeArrays(new int[]{1,2}, new int[]{3,4}); // {1,2,3,4}</code></pre>
+        </details>
+
+        <details>
+          <summary>
+            <h4>Write a method to find the counts of even and odd numbers</h4>
+          </summary>
+          <p class="explanation">
+            <strong>Why:</strong> Data categorization. This pattern of iterating
+            through data and sorting it into different buckets is extremely
+            common.<br /><strong>Principle:</strong> Efficiency. You can find
+            both counts in a single pass through the array, which is much better
+            than looping through it once for evens and a second time for odds.
+          </p>
+          <pre><code class="language-java">public static void countEvenOdd(int[] arr) {
+    int evenCount = 0;
+    int oddCount = 0;
+    for (int num : arr) {
+        if (num % 2 == 0) {
+            evenCount++;
+        } else {
+            oddCount++;
+        }
+    }
+    System.out.println("Even: " + evenCount + ", Odd: " + oddCount);
+}
+// To run: countEvenOdd(new int[]{1, 2, 3, 4, 5});  // Even: 2, Odd: 3</code></pre>
+        </details>
+
+        <p class="blog-conclusion">
+          You didn't just solve problems.<br />
+          You built tools and learned the principles behind them.<br />
+          That's engineering. Keep going.
+        </p>
+      </article>
+    </main>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+    ></script>
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [
+            ["$", "$"],
+            ["\\(", "\\)"],
+          ],
+          displayMath: [
+            ["$$", "$$"],
+            ["\\[", "\\]"],
+          ],
+        },
+      };
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="../script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/intersection-observer@0.12.0/intersection-observer.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize AOS animations
+        AOS.init({
+          duration: 800,
+          easing: "ease-in-out",
+          once: true,
+          offset: 100,
+        });
+
+        // Reading Progress Bar
+        function createProgressBar() {
+          const progressBar = document.createElement("div");
+          progressBar.id = "reading-progress";
+          progressBar.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, #7a7cff, #00d4ff);
+            z-index: 9999;
+            transition: width 0.3s ease;
+          `;
+          document.body.appendChild(progressBar);
+
+          window.addEventListener("scroll", () => {
+            const windowHeight =
+              document.documentElement.scrollHeight -
+              document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            progressBar.style.width = scrolled + "%";
+          });
+        }
+        createProgressBar();
+
+        // Copy Code Button for all code blocks
+        function addCopyButtons() {
+          document.querySelectorAll("pre code").forEach((codeBlock) => {
+            const pre = codeBlock.parentNode;
+            const button = document.createElement("button");
+            button.textContent = "📋 Copy";
+            button.className = "copy-btn";
+            button.style.cssText = `
+              position: absolute;
+              top: 8px;
+              right: 8px;
+              padding: 4px 8px;
+              background: rgba(255, 255, 255, 0.1);
+              color: #fff;
+              border: 1px solid rgba(255, 255, 255, 0.2);
+              border-radius: 4px;
+              cursor: pointer;
+              font-size: 12px;
+              transition: all 0.2s ease;
+            `;
+
+            pre.style.position = "relative";
+
+            button.addEventListener("click", async () => {
+              try {
+                await navigator.clipboard.writeText(codeBlock.textContent);
+                button.textContent = "✅ Copied!";
+                button.style.background = "rgba(34, 197, 94, 0.2)";
+                setTimeout(() => {
+                  button.textContent = "📋 Copy";
+                  button.style.background = "rgba(255, 255, 255, 0.1)";
+                }, 2000);
+              } catch (err) {
+                button.textContent = "❌ Failed";
+                setTimeout(() => {
+                  button.textContent = "📋 Copy";
+                }, 2000);
+              }
+            });
+
+            pre.appendChild(button);
+          });
+        }
+
+        // Estimated Reading Time
+        function addReadingTime() {
+          const content = document.querySelector(".blog-content");
+          const text = content.textContent;
+          const wordsPerMinute = 200;
+          const wordCount = text.trim().split(/\s+/).length;
+          const readingTime = Math.ceil(wordCount / wordsPerMinute);
+
+          const readingTimeElement = document.createElement("p");
+          readingTimeElement.className = "reading-time";
+          readingTimeElement.innerHTML = `📖 ${readingTime} min read • ${wordCount.toLocaleString()} words`;
+          readingTimeElement.style.cssText = `
+            color: #888;
+            font-size: 0.9em;
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+          `;
+
+          const blogMeta = document.querySelector(".blog-meta");
+          blogMeta.parentNode.insertBefore(
+            readingTimeElement,
+            blogMeta.nextSibling
+          );
+        }
+
+        // Function to process markdown in text content (enhanced)
+        function processMarkdown(element) {
+          const walker = document.createTreeWalker(
+            element,
+            NodeFilter.SHOW_TEXT,
+            null,
+            false
+          );
+
+          const textNodes = [];
+          let node;
+          while ((node = walker.nextNode())) {
+            textNodes.push(node);
+          }
+
+          textNodes.forEach((textNode) => {
+            let text = textNode.textContent;
+            let hasMarkdown = false;
+
+            // Enhanced markdown patterns
+            if (
+              text.includes("**") ||
+              text.includes("`") ||
+              text.includes("*") ||
+              text.includes("~~")
+            ) {
+              hasMarkdown = true;
+
+              // Convert markdown to HTML with more patterns
+              text = text.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+              text = text.replace(/`([^`]+)`/g, "<code>$1</code>");
+              text = text.replace(/\*([^*]+)\*/g, "<em>$1</em>");
+              text = text.replace(/~~([^~]+)~~/g, "<del>$1</del>"); // Strikethrough
+            }
+
+            if (hasMarkdown) {
+              const temp = document.createElement("span");
+              temp.innerHTML = text;
+
+              const parent = textNode.parentNode;
+              while (temp.firstChild) {
+                parent.insertBefore(temp.firstChild, textNode);
+              }
+              parent.removeChild(textNode);
+            }
+          });
+        }
+
+        // Back to Top Button
+        function addBackToTop() {
+          const backToTop = document.createElement("button");
+          backToTop.innerHTML = "↑";
+          backToTop.className = "back-to-top";
+          backToTop.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7a7cff, #00d4ff);
+            color: white;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(122, 124, 255, 0.3);
+          `;
+
+          document.body.appendChild(backToTop);
+
+          window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) {
+              backToTop.style.opacity = "1";
+              backToTop.style.visibility = "visible";
+            } else {
+              backToTop.style.opacity = "0";
+              backToTop.style.visibility = "hidden";
+            }
+          });
+
+          backToTop.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          });
+        }
+
+        // Table of Contents Generator
+        function generateTOC() {
+          const headings = document.querySelectorAll("h2, h3, h4");
+          if (headings.length < 3) return; // Only create TOC if there are enough headings
+
+          const toc = document.createElement("div");
+          toc.className = "table-of-contents";
+          toc.innerHTML = "<h3>📚 Table of Contents</h3>";
+
+          const tocList = document.createElement("ul");
+          tocList.style.cssText = `
+            list-style: none;
+            padding-left: 0;
+            margin: 1rem 0;
+          `;
+
+          headings.forEach((heading, index) => {
+            const id = `heading-${index}`;
+            heading.id = id;
+
+            const listItem = document.createElement("li");
+            const link = document.createElement("a");
+            link.href = `#${id}`;
+            link.textContent = heading.textContent;
+            link.style.cssText = `
+              color: #7a7cff;
+              text-decoration: none;
+              padding: 0.25rem 0;
+              display: block;
+              border-left: 2px solid transparent;
+              padding-left: ${
+                heading.tagName === "H2"
+                  ? "0"
+                  : heading.tagName === "H3"
+                  ? "1rem"
+                  : "2rem"
+              };
+              transition: all 0.2s ease;
+            `;
+
+            link.addEventListener("mouseenter", () => {
+              link.style.borderLeftColor = "#7a7cff";
+              link.style.paddingLeft = `calc(${link.style.paddingLeft} + 0.5rem)`;
+            });
+
+            link.addEventListener("mouseleave", () => {
+              link.style.borderLeftColor = "transparent";
+              link.style.paddingLeft = `${
+                heading.tagName === "H2"
+                  ? "0"
+                  : heading.tagName === "H3"
+                  ? "1rem"
+                  : "2rem"
+              }`;
+            });
+
+            listItem.appendChild(link);
+            tocList.appendChild(listItem);
+          });
+
+          toc.appendChild(tocList);
+          toc.style.cssText = `
+            background: rgba(122, 124, 255, 0.1);
+            border: 1px solid rgba(122, 124, 255, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(10px);
+          `;
+
+          // Insert TOC after the intro paragraph
+          const intro = document.querySelector(".blog-intro");
+          intro.parentNode.insertBefore(toc, intro.nextSibling.nextSibling);
+        }
+
+        // Initialize all features
+        setTimeout(() => {
+          addReadingTime();
+          addCopyButtons();
+          addBackToTop();
+          generateTOC();
+
+          // Process markdown in all relevant elements
+          const paragraphs = document.querySelectorAll(
+            "p, summary, li, .explanation"
+          );
+          paragraphs.forEach(processMarkdown);
+
+          // Re-run Prism highlighting after markdown conversion
+          if (typeof Prism !== "undefined") {
+            Prism.highlightAll();
+          }
+
+          // Re-render MathJax if available
+          if (window.MathJax) {
+            MathJax.typesetPromise();
+          }
+        }, 100);
+
+        // Add smooth scrolling for all anchor links
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute("href"));
+            if (target) {
+              target.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
