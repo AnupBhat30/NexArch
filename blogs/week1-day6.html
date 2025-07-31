@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day 6: Putting It All Together - A Command-Line Contact Book - Anup's Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+    />
+    <style>
+      details {
+        border: 1px solid #333;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+        padding: 0.5rem 1rem;
+      }
+      summary {
+        cursor: pointer;
+        font-weight: bold;
+        outline: none;
+      }
+      summary h4 {
+        display: inline-block;
+        margin: 0;
+      }
+      .quote-box {
+        background-color: #2d2d2d;
+        border-left: 4px solid #7a7cff;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        border-radius: 4px;
+      }
+      .quote-box p {
+        margin: 0;
+        font-style: italic;
+        color: #cccccc;
+        line-height: 1.6;
+      }
+      .explanation {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        color: #000;
+        font-size: 0.95rem;
+        border-left: 2px solid #555;
+        padding-left: 1rem;
+      }
+      .explanation strong {
+        color: #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="paper"></div>
+
+    <main class="container">
+      <header class="header">
+        <a href="../index.html" class="back-link">← Back to Portfolio</a>
+        <h1>Day 6: Putting It All Together - A Command-Line Contact Book</h1>
+        <p class="blog-meta">August 5, 2025</p>
+      </header>
+
+      <article class="blog-content">
+        <p class="blog-intro">
+          Knowledge is a set of tools. Wisdom is building something with them.<br />
+          Today, we build.
+        </p>
+
+        <p>
+          This is it. The final day of our foundational week. We've covered variables, functions, data structures, algorithms, OOP, and error handling. Now it's time to synthesize that knowledge and create something tangible. We are going to build a complete, functional **Command-Line Contact Book** application from scratch.
+        </p>
+        <p>
+          This project will touch on every single topic from the past five days. It will demonstrate how these individual concepts don't exist in a vacuum but instead weave together to form the fabric of a real application. Let's get started.
+        </p>
+
+        <h2 data-aos="fade-up">
+          Project Requirements
+        </h2>
+        <p data-aos="fade-up" data-aos-delay="100">
+          Our contact book application needs to have the following features:
+          <ol>
+            <li>Add a new contact (name, phone number, email).</li>
+            <li>View all contacts, sorted alphabetically by name.</li>
+            <li>Search for a contact by name.</li>
+            <li>Delete a contact.</li>
+            <li>Save the contact list to a file.</li>
+            <li>Load the contact list from a file when the application starts.</li>
+            <li>A simple, menu-driven command-line interface.</li>
+          </ol>
+        </p>
+
+        <h2 data-aos="fade-up">
+          The Python Implementation
+        </h2>
+
+        <h3 data-aos="slide-right">
+          Step 1: The `Contact` Class (The Blueprint)
+        </h3>
+        <p>
+          First, we'll model a single contact using a class. This encapsulates the data for one person. We'll also add a `__str__` method for a nice, readable output.
+        </p>
+        <pre><code class="language-python"># Day 4: OOP
+class Contact:
+    def __init__(self, name, phone, email):
+        self.name = name
+        self.phone = phone
+        self.email = email
+
+    def __str__(self):
+        return f"Name: {self.name}, Phone: {self.phone}, Email: {self.email}"
+</code></pre>
+
+        <h3 data-aos="slide-right">
+          Step 2: The `ContactBook` Class (The Engine)
+        </h3>
+        <p>
+          This class will manage all our `Contact` objects. It will hold a list of contacts and contain the methods for adding, viewing, searching, and deleting.
+        </p>
+        <pre><code class="language-python"># Day 2: Functions & Data Structures
+# Day 3: Algorithms (Sorting)
+import json
+
+class ContactBook:
+    def __init__(self):
+        self.contacts = []
+
+    def add_contact(self, contact):
+        self.contacts.append(contact)
+
+    def view_contacts(self):
+        # Sort by name before displaying
+        sorted_contacts = sorted(self.contacts, key=lambda c: c.name)
+        for contact in sorted_contacts:
+            print(contact)
+
+    # ... other methods like search, delete, save, load ...
+</code></pre>
+
+        <h3 data-aos="slide-right">
+          Step 3: File I/O and Error Handling
+        </h3>
+        <p>
+          Here's where we add persistence. We'll use the `json` module to easily save and load our list of contact objects. We'll wrap this in `try...except` blocks to handle cases where the file doesn't exist yet.
+        </p>
+        <pre><code class="language-python"># Day 5: Error Handling & File I/O
+    def save_to_file(self, filename):
+        with open(filename, 'w') as f:
+            # We need to convert our Contact objects to dictionaries to save as JSON
+            json.dump([contact.__dict__ for contact in self.contacts], f, indent=4)
+
+    def load_from_file(self, filename):
+        try:
+            with open(filename, 'r') as f:
+                data = json.load(f)
+                self.contacts = [Contact(**item) for item in data]
+        except FileNotFoundError:
+            self.contacts = [] # Start with an empty list if no file
+        except json.JSONDecodeError:
+            self.contacts = [] # File is corrupted or empty
+</code></pre>
+
+        <h3 data-aos="slide-right">
+          Step 4: The Main Application Loop (The UI)
+        </h3>
+        <p>
+          This is the user-facing part of our application. A `while` loop keeps the program running, displaying a menu and asking for user input.
+        </p>
+        <pre><code class="language-python"># Day 1: Variables & I/O
+def main():
+    contact_book = ContactBook()
+    # ... main loop logic ...
+
+if __name__ == "__main__":
+    main()
+</code></pre>
+
+        <div class="quote-box">
+          <p>
+            The `if __name__ == "__main__:"` block is a standard Python convention. It ensures that the code inside it only runs when the script is executed directly (not when it's imported as a module into another script).
+          </p>
+        </div>
+
+        <h3>The Complete Python Code</h3>
+        <details>
+            <summary><h4>Click to view the full `contact_book.py`</h4></summary>
+            <pre><code class="language-python">import json
+
+class Contact:
+    """Represents a single contact."""
+    def __init__(self, name, phone, email):
+        self.name = name
+        self.phone = phone
+        self.email = email
+
+    def __str__(self):
+        return f"Name: {self.name:<20} Phone: {self.phone:<15} Email: {self.email}"
+
+class ContactBook:
+    """Manages a collection of contacts."""
+    def __init__(self, filename='contacts.json'):
+        self.filename = filename
+        self.contacts = []
+        self.load_from_file()
+
+    def add_contact(self, contact):
+        self.contacts.append(contact)
+        self.save_to_file()
+        print("Contact added successfully.")
+
+    def view_contacts(self):
+        if not self.contacts:
+            print("No contacts to display.")
+            return
+        # Sort by name for consistent viewing
+        sorted_contacts = sorted(self.contacts, key=lambda c: c.name)
+        for contact in sorted_contacts:
+            print(contact)
+
+    def search_contact(self, name):
+        found_contacts = [c for c in self.contacts if name.lower() in c.name.lower()]
+        if not found_contacts:
+            print("No contact found with that name.")
+        else:
+            for contact in found_contacts:
+                print(contact)
+
+    def delete_contact(self, name):
+        contact_to_delete = None
+        for contact in self.contacts:
+            if contact.name.lower() == name.lower():
+                contact_to_delete = contact
+                break
+
+        if contact_to_delete:
+            self.contacts.remove(contact_to_delete)
+            self.save_to_file()
+            print("Contact deleted successfully.")
+        else:
+            print("No contact found with that exact name.")
+
+    def save_to_file(self):
+        with open(self.filename, 'w') as f:
+            json.dump([contact.__dict__ for contact in self.contacts], f, indent=4)
+
+    def load_from_file(self):
+        try:
+            with open(self.filename, 'r') as f:
+                data = json.load(f)
+                self.contacts = [Contact(**item) for item in data]
+        except FileNotFoundError:
+            self.contacts = []
+        except json.JSONDecodeError:
+            print("Warning: Could not decode contacts file. Starting fresh.")
+            self.contacts = []
+
+def print_menu():
+    print("\n--- Contact Book Menu ---")
+    print("1. Add Contact")
+    print("2. View All Contacts")
+    print("3. Search Contact")
+    print("4. Delete Contact")
+    print("5. Exit")
+
+def main():
+    contact_book = ContactBook()
+
+    while True:
+        print_menu()
+        choice = input("Enter your choice (1-5): ")
+
+        if choice == '1':
+            name = input("Enter name: ")
+            phone = input("Enter phone: ")
+            email = input("Enter email: ")
+            contact_book.add_contact(Contact(name, phone, email))
+        elif choice == '2':
+            contact_book.view_contacts()
+        elif choice == '3':
+            name = input("Enter name to search: ")
+            contact_book.search_contact(name)
+        elif choice == '4':
+            name = input("Enter name to delete: ")
+            contact_book.delete_contact(name)
+        elif choice == '5':
+            print("Exiting Contact Book. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please enter a number between 1 and 5.")
+
+if __name__ == "__main__":
+    main()
+</code></pre>
+        </details>
+
+        <h2 data-aos="fade-up">
+          The Java Implementation
+        </h2>
+        <p>
+          The Java version follows the same logic but requires more structure. We'll need separate files for our classes and a main class to run the application. We'll use a simple JSON library like `Gson` for file operations (you would need to add this to your project's dependencies).
+        </p>
+
+        <h3>The Complete Java Code</h3>
+        <details>
+            <summary><h4>Click to view the full Java project structure</h4></summary>
+            <p>You would typically organize this into separate files: `Contact.java`, `ContactBook.java`, and `Main.java`.</p>
+            <pre><code class="language-java">// Contact.java
+public class Contact {
+    private String name;
+    private String phone;
+    private String email;
+
+    // Constructor, getters, and setters...
+
+    @Override
+    public String toString() {
+        return "Name: " + name + ", Phone: " + phone + ", Email: " + email;
+    }
+}
+
+// ContactBook.java
+import java.util.ArrayList;
+import java.util.List;
+// ... other imports for file handling and JSON
+
+public class ContactBook {
+    private List<Contact> contacts = new ArrayList<>();
+    private String filename = "contacts.json";
+    // Gson instance for JSON parsing
+
+    public void addContact(Contact contact) { /* ... */ }
+    public void viewContacts() { /* ... */ }
+    // ... etc.
+
+    public void saveToFile() { /* ... */ }
+    public void loadFromFile() { /* ... */ }
+}
+
+// Main.java
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        ContactBook contactBook = new ContactBook();
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            // Print menu
+            // Get user choice
+            // Use a switch statement to handle choices
+        }
+    }
+}
+</code></pre>
+        </details>
+
+        <p class="blog-conclusion">
+          Congratulations! You've gone from zero to building a complete, persistent application in one week.<br />
+          You've learned the syntax, the structure, and the thought processes behind two of the world's most powerful programming languages.<br/>
+          This is just the beginning. The foundation is laid. Now, what will you build on top of it?
+        </p>
+      </article>
+    </main>
+
+    <!-- MathJax for beautiful math rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        }
+      };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="../script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/intersection-observer@0.12.0/intersection-observer.js"></script>
+    <script src="blog-script.js"></script>
+  </body>
+</html>
